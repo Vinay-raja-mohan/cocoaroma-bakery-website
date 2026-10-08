@@ -1,66 +1,44 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+import Hero from '@/components/Hero';
+import SignatureBakesSection from '@/components/SignatureBakesSection';
+import ArtisansProcessSection from '@/components/ArtisansProcessSection';
+import OurSpecialsSection from '@/components/OurSpecialsSection';
+import OurStoresSection from '@/components/StoreLocator';
+import ContactSection from '@/components/Contact';
+import Testimonials from '@/components/Testimonials';
+import { categories, bestsellers } from '@/data/menu';
 export default function Home() {
+  // Extract all items from categories to find bestsellers
+  const allItems = categories.flatMap(cat => cat.items || []);
+  const bestsellerProducts = bestsellers
+    ? bestsellers.map(slug => allItems.find(item => item.slug === slug)).filter(Boolean)
+    : [];
+  
+  // Just show a few featured categories as clean cards
+  const featuredCategories = categories.slice(0, 4);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="home-page" style={{ backgroundColor: '#FFF8E7', minHeight: '100vh', paddingBottom: '4rem' }}>
+      <Hero />
+      <ArtisansProcessSection />
+      <SignatureBakesSection />
+
+      <OurSpecialsSection />
+
+      <OurStoresSection />
+
+      <section className="testimonials-section container" style={{ padding: '4rem 0' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{ fontFamily: '"Playfair Display", serif', color: '#0D5E3D', fontSize: '3rem', margin: 0 }}>
+            Our Reviews
+          </h2>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+        <Testimonials />
+      </section>
+
+      <ContactSection />
     </div>
   );
 }

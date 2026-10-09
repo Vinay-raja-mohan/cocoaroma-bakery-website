@@ -291,7 +291,7 @@ export const cheesecakes = [
     name: 'Blueberry Cheesecake',
     description: 'Classic creamy blueberry cheesecake',
     price: 850,
-    image: '/images/cakes/image-coming-soon.svg',
+    image: '/images/Cheese Cakes/Blue Berry Cheese Cake/Blue Berry Cheese Cake.png',
     imageFallback: '/images/cakes/image-coming-soon.svg',
   },
   {
@@ -299,8 +299,9 @@ export const cheesecakes = [
     name: 'Biscoff Cheesecake',
     description: 'Rich biscoff flavor',
     price: 850,
-    image: '/images/cakes/image-coming-soon.svg',
+    image: '/images/Cheese Cakes/Biscoff Cheese Cake/Biscoff Cheese Cake.png',
     imageFallback: '/images/cakes/image-coming-soon.svg',
+    imageScale: 1.2,
   }
 ];
 
@@ -333,19 +334,11 @@ export const brownies = [
 
 export const desserts = [
   {
-    id: 'chocolate-lava',
-    name: 'Chocolate Lava',
-    description: 'Rich molten chocolate center',
-    price: 75,
-    image: '/images/cakes/image-coming-soon.svg',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
     id: 'dark-mousse',
     name: 'Dark Mousse',
     description: 'Silky dark chocolate mousse',
     price: 90,
-    image: '/images/cakes/image-coming-soon.svg',
+    image: '/images/Desserts/dark mousse/dark mousse.png',
     imageFallback: '/images/cakes/image-coming-soon.svg',
   },
   {
@@ -353,7 +346,15 @@ export const desserts = [
     name: 'Kitkat Mousse',
     description: 'Creamy mousse with crunchy KitKat',
     price: 90,
-    image: '/images/cakes/image-coming-soon.svg',
+    image: '/images/Desserts/kitkat mousse/kitkat mousse.png',
+    imageFallback: '/images/cakes/image-coming-soon.svg',
+  },
+  {
+    id: 'trio-mousse',
+    name: 'Trio Mousse',
+    description: 'Three layers of chocolate heaven',
+    price: 90,
+    image: '/images/Desserts/trio mousse/trio mousse.png',
     imageFallback: '/images/cakes/image-coming-soon.svg',
   }
 ];
@@ -376,24 +377,24 @@ export const cupcakes = [
     imageFallback: '/images/cakes/image-coming-soon.svg',
   },
   {
-    id: 'raspberry-cupcake',
-    name: 'Raspberry Cupcake',
-    description: 'Tangy raspberry frosted cupcake',
-    price: 65,
-    image: '/images/cakes/image-coming-soon.svg',
+    id: 'red-velvet-cupcake',
+    name: 'Red Velvet Cupcake',
+    description: 'Classic red velvet frosted cupcake',
+    price: 75,
+    image: '/images/Cupcakes/RedVelvet Cupcake/RedVelvet Cupcake.png',
     imageFallback: '/images/cakes/image-coming-soon.svg',
   }
 ];
 
 export const uniqueCakes = [
   {
-    id: 'all-topped-chocolate',
-    name: 'All Topped Chocolate',
-    description: 'Ultimate chocolate experience',
-    price: 750,
+    id: 'belgium-chocolate',
+    name: 'Belgium Chocolate',
+    description: 'Rich belgium chocolate indulgence',
+    price: 600,
     badge: 'BEST SELLER',
-    image: '/images/cakes/image-coming-soon.svg',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
+    image: '/images/cakes/belgium-chocolate/1.png',
+    imageFallback: '/images/cakes/belgium-chocolate/1.jpg',
   },
   {
     id: 'royale-truffle',

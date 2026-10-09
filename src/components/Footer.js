@@ -62,7 +62,7 @@ export default function Footer() {
 
         .footer-logo-text {
           font-family: 'Playfair Display', serif;
-          font-size: 2rem;
+          font-size: clamp(1.5rem, 3vw, 2rem);
           font-weight: 700;
           color: #FFF8E7;
           margin-bottom: 1rem;
@@ -203,17 +203,27 @@ export default function Footer() {
           color: rgba(255, 255, 255, 0.6);
         }
 
+        @media (max-width: 1024px) {
+          .footer-container { gap: 2rem; }
+          .footer-col-left { min-width: 280px; }
+          .footer-col-middle, .footer-col-right { min-width: 200px; }
+        }
+
         @media (max-width: 768px) {
           .footer-container { 
             flex-direction: column; 
             width: 100%;
-            padding: 3rem 20px 1.5rem 20px;
+            padding: 2.5rem 20px 1rem;
           }
-          .footer-bottom-section {
-            width: 100%;
-            padding: 0 20px;
+          .footer-col-left, .footer-col-middle, .footer-col-right { 
+            min-width: 100%; 
+            text-align: center;
           }
-          .footer-col-left, .footer-col-middle, .footer-col-right { min-width: 100%; }
+          .social-links { justify-content: center; }
+          .quick-links li { text-align: center; }
+          .contact-item { justify-content: center; }
+          .available-box { justify-content: center; }
+          .footer-bottom-section { padding: 0 20px; }
         }
       `}</style>
 

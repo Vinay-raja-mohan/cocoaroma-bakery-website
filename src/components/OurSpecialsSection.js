@@ -63,7 +63,7 @@ export default function OurSpecialsSection() {
 
         .section-header {
           font-family: 'Playfair Display', serif;
-          font-size: 2.5rem;
+          font-size: clamp(1.6rem, 4vw, 2.5rem);
           color: #0D5E3D;
           text-align: center;
           margin: 0 0 30px 0;
@@ -126,7 +126,7 @@ export default function OurSpecialsSection() {
 
         .ed-title {
           font-family: 'Playfair Display', serif;
-          font-size: 2.2rem;
+          font-size: clamp(1.5rem, 4vw, 2.2rem);
           line-height: 1.1;
           margin: 0 0 15px 0;
           font-weight: 500;
@@ -135,7 +135,7 @@ export default function OurSpecialsSection() {
 
         .ed-desc {
           font-family: 'Inter', sans-serif;
-          font-size: 0.95rem;
+          font-size: clamp(0.85rem, 2vw, 0.95rem);
           line-height: 1.6;
           margin-bottom: 25px;
           color: rgba(255, 248, 231, 0.9);
@@ -200,10 +200,25 @@ export default function OurSpecialsSection() {
           .editorial-text-box {
             grid-column: 1;
             grid-row: 2;
-            margin-top: -40px; /* Overlap upwards on mobile */
-            margin-left: 15px;
-            margin-right: 15px;
+            margin: -30px 15px 0;
             padding: 30px 20px;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .specials-editorial-section {
+            padding: 24px 16px;
+            min-height: auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .editorial-image-wrapper {
+            height: 220px;
+          }
+          .editorial-text-box {
+            margin: -20px 10px 0;
+            padding: 24px 16px;
           }
         }
       `}</style>

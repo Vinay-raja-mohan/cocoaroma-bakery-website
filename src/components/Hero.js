@@ -29,12 +29,38 @@ export default function Hero() {
   };
 
   return (
-    <section className="hero-slider" style={{ position: 'relative', width: '100%', height: 'calc(100vh - 110px)', overflow: 'hidden' }}>
+    <section className="hero-slider" style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
       <style>{`
+        .hero-slider {
+          height: min(calc(100vh - 110px), 600px);
+        }
+        
         .slider-arrow {
           background-color: rgba(255,255,255,0.9) !important;
           transition: all 0.3s ease !important;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          border: none;
+          border-radius: 50%;
+          width: 45px;
+          height: 45px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+        
+        .slider-arrow.left {
+          left: 30px;
+        }
+        
+        .slider-arrow.right {
+          right: 30px;
+        }
+        
         .slider-arrow:hover {
           background-color: #0D5E3D !important;
         }
@@ -44,6 +70,34 @@ export default function Hero() {
         }
         .slider-arrow:hover svg {
           stroke: #FFFFFF;
+        }
+        
+        .slide-title {
+          color: #0D5E3D;
+          font-family: 'Inter', sans-serif;
+          font-weight: bold;
+          font-size: clamp(1rem, 4vw, 2.5rem);
+        }
+
+        @media (max-width: 767px) {
+          .hero-slider {
+            height: 50vw !important;
+            min-height: 250px !important;
+            max-height: 500px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .slider-arrow.left {
+            left: 10px !important;
+            width: 36px !important;
+            height: 36px !important;
+          }
+          .slider-arrow.right {
+            right: 10px !important;
+            width: 36px !important;
+            height: 36px !important;
+          }
         }
       `}</style>
       
@@ -67,7 +121,7 @@ export default function Hero() {
               zIndex: currentSlide === index ? 1 : 0
             }}
           >
-            <h2 style={{ color: '#0D5E3D', fontFamily: 'Inter, sans-serif', fontSize: '2.5rem', fontWeight: 'bold' }}>
+            <h2 className="slide-title">
               {slide.text}
             </h2>
           </div>
@@ -76,27 +130,17 @@ export default function Hero() {
 
       {/* Navigation Arrows */}
       <button 
-        className="slider-arrow"
+        className="slider-arrow left"
         onClick={prevSlide}
-        style={{ 
-          position: 'absolute', top: '50%', left: '30px', transform: 'translateY(-50%)',
-          border: 'none', borderRadius: '50%',
-          width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', zIndex: 10, boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-        }}
+        aria-label="Previous slide"
       >
         <ChevronLeft size={24} />
       </button>
       
       <button 
-        className="slider-arrow"
+        className="slider-arrow right"
         onClick={nextSlide}
-        style={{ 
-          position: 'absolute', top: '50%', right: '30px', transform: 'translateY(-50%)',
-          border: 'none', borderRadius: '50%',
-          width: '45px', height: '45px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', zIndex: 10, boxShadow: '0 4px 10px rgba(0,0,0,0.2)'
-        }}
+        aria-label="Next slide"
       >
         <ChevronRight size={24} />
       </button>

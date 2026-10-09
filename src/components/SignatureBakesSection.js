@@ -51,15 +51,18 @@ export default function SignatureBakesSection() {
         .signature-bakes-section {
           background-color: #FFFFFF;
           padding: 0 20px 100px; /* Removed top padding so bookmark touches top */
+          overflow: hidden;
+          box-sizing: border-box;
         }
 
         .signature-container {
-          max-width: 93%;
+          max-width: 100%;
           margin: 0px 100px;
           display: grid;
           grid-template-columns: 420px 1fr;
           gap: 40px;
           align-items: start;
+          box-sizing: border-box;
         }
 
         .signature-left {
@@ -72,11 +75,12 @@ export default function SignatureBakesSection() {
           position: sticky;
           top: 71px; /* Stick below navbar */
           box-shadow: 0 25px 35px -15px rgba(13, 94, 61, 0.4); /* Shadow only at the bottom */
+          box-sizing: border-box;
         }
 
         .signature-left h2 {
           font-family: 'Playfair Display', serif;
-          font-size: 2.8rem;
+          font-size: clamp(1.8rem, 5vw, 2.8rem);
           line-height: 1.1;
           margin: 0 0 1.5rem 0;
           font-weight: 500;
@@ -119,6 +123,7 @@ export default function SignatureBakesSection() {
         /* Category Scroll Area */
         .signature-right {
           padding-top: 40px; /* Equal spacing above the slider */
+          min-width: 0;
         }
         
         .category-nav-wrapper {
@@ -196,7 +201,6 @@ export default function SignatureBakesSection() {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 30px;
-          /* Removed padding-top so gap is handled by margin-bottom of slider */
         }
 
         .signature-card {
@@ -208,11 +212,12 @@ export default function SignatureBakesSection() {
           display: flex;
           flex-direction: column;
           border: 1px solid #f0f0f0;
+          box-sizing: border-box;
         }
 
         .signature-card:hover {
           transform: translateY(-5px);
-          box-shadow: 0 0 25px rgba(13, 94, 61, 0.25); /* Green shadow all around */
+          box-shadow: 0 0 25px rgba(13, 94, 61, 0.25);
         }
 
         .card-image-wrap {
@@ -232,7 +237,7 @@ export default function SignatureBakesSection() {
 
         .card-title {
           font-family: 'Playfair Display', serif;
-          font-size: 1.1rem;
+          font-size: clamp(0.9rem, 2vw, 1.1rem);
           color: #0D5E3D;
           margin: 0;
           line-height: 1.2;
@@ -278,32 +283,52 @@ export default function SignatureBakesSection() {
           box-shadow: 0 4px 15px rgba(13, 94, 61, 0.2);
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1280px) {
+          .signature-container {
+            grid-template-columns: 320px 1fr;
+            margin: 0 60px;
+          }
           .signature-grid {
             grid-template-columns: repeat(3, 1fr);
           }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
           .signature-container {
             grid-template-columns: 1fr;
+            margin: 0 20px;
           }
           .signature-left {
             position: relative;
             top: 0;
+            border-radius: 32px;
+            padding: 40px 24px 60px;
             text-align: center;
             align-items: center;
-            border-radius: 32px; /* Round all corners on mobile */
-            margin-top: 40px;
+          }
+          .signature-bakes-section {
+            padding-bottom: 60px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .signature-container {
+            margin: 0 20px;
           }
           .signature-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 480px) {
           .signature-grid {
             grid-template-columns: 1fr;
+          }
+          .signature-left {
+            padding: 30px 20px 40px;
+          }
+          .signature-bakes-section {
+            padding-bottom: 40px;
           }
         }
       `}</style>

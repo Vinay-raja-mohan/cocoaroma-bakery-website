@@ -59,8 +59,8 @@ export default function Navbar() {
             </svg>
             <span>+91 9491568833</span>
           </div>
-          <span className="top-contact-divider">|</span>
-          <div className="top-contact-item">
+          <span className="top-contact-divider email-divider">|</span>
+          <div className="top-contact-item email-item">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
               <polyline points="22,6 12,13 2,6"></polyline>
@@ -93,6 +93,11 @@ export default function Navbar() {
         }}
       >
       <style>{`
+        .navbar-header {
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+
         .top-contact-bar {
           background-color: #0D5E3D;
           color: #FFF;
@@ -140,7 +145,9 @@ export default function Navbar() {
 
         .nav-logo-img {
           object-fit: contain;
-          transition: transform 0.3s ease;
+          transition: transform 0.3s ease, width 0.3s ease;
+          width: 180px;
+          height: auto;
         }
 
         .nav-logo-img:hover {
@@ -371,17 +378,17 @@ export default function Navbar() {
 
         .mobile-menu {
           display: none;
-          position: absolute;
-          top: 100%;
+          position: fixed;
+          top: 0;
           left: 0;
           right: 0;
+          bottom: 0;
+          height: 100vh;
           background: #FFF;
-          border-bottom: 1px solid #eee;
-          box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-          padding: 16px 40px 24px;
+          padding: 80px 16px 24px;
           animation: slideDown 0.3s ease;
-          max-height: calc(100vh - 80px);
           overflow-y: auto;
+          z-index: -1;
         }
 
         .mobile-menu.open {
@@ -451,20 +458,40 @@ export default function Navbar() {
           to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 768px) {
+        /* Responsive Breakpoints */
+        @media (max-width: 1600px) and (min-width: 1281px) {
+          /* Desktop */
+        }
+
+        @media (max-width: 1280px) and (min-width: 1025px) {
+          .nav-links { gap: 32px; }
+        }
+
+        @media (max-width: 1024px) {
+          .nav-links { display: none; }
+          .hamburger { display: flex; }
+          .nav-logo-img { width: 140px; }
+        }
+
+        @media (max-width: 767px) {
+          .top-contact-bar {
+            font-size: 0.75rem;
+          }
           .top-contact-container {
             justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
             padding: 0 20px;
           }
-          .top-contact-divider {
+          .top-contact-divider:not(.email-divider) {
             display: none;
           }
-          .nav-links { display: none; }
-          .hamburger { display: flex; }
           .nav-container { padding: 0 20px; }
-          .mobile-menu { padding: 16px 20px 24px; }
+          .nav-logo-img { width: 120px; }
+        }
+
+        @media (max-width: 480px) {
+          .email-item, .email-divider { display: none; }
         }
       `}</style>
 
@@ -476,6 +503,7 @@ export default function Navbar() {
             alt="Cocoaroma Logo"
             width={180}
             height={48}
+            sizes="(max-width: 767px) 120px, (max-width: 1024px) 140px, 180px"
             className="nav-logo-img"
           />
         </Link>
@@ -607,3 +635,4 @@ export default function Navbar() {
     </>
   );
 }
+

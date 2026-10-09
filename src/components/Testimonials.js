@@ -172,9 +172,27 @@ export default function Testimonials() {
           }
         }
         
+        @media (max-width: 768px) {
+          .reviews-carousel-wrapper {
+            padding: 1rem 20px !important;
+          }
+          .carousel-btn.left {
+            left: -10px;
+          }
+          .carousel-btn.right {
+            right: -10px;
+          }
+        }
+        
         @media (max-width: 600px) {
           .reviews-track {
             width: ${infiniteReviews.length * 100}%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .review-card {
+            padding: 16px;
           }
         }
       `}</style>

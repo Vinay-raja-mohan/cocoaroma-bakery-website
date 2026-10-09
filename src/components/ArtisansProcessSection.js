@@ -27,6 +27,7 @@ export default function ArtisansProcessSection() {
           background-color: #FFF8E7;
           padding: 80px 20px 120px;
           overflow: hidden;
+          box-sizing: border-box;
         }
 
         .artisan-container {
@@ -36,6 +37,7 @@ export default function ArtisansProcessSection() {
           grid-template-columns: 1fr 1fr;
           gap: 80px;
           align-items: center;
+          box-sizing: border-box;
         }
 
         .masonry-grid {
@@ -94,7 +96,7 @@ export default function ArtisansProcessSection() {
 
         .story-title {
           font-family: 'Playfair Display', serif;
-          font-size: 4rem;
+          font-size: clamp(2rem, 5vw, 4rem);
           line-height: 1.1;
           color: #0D5E3D;
           margin: 0 0 30px 0;
@@ -109,7 +111,7 @@ export default function ArtisansProcessSection() {
 
         .story-text {
           font-family: 'Inter', sans-serif;
-          font-size: 1.15rem;
+          font-size: clamp(0.95rem, 2vw, 1.15rem);
           line-height: 1.8;
           color: #444;
           margin-bottom: 40px;
@@ -118,7 +120,7 @@ export default function ArtisansProcessSection() {
 
         .story-stats {
           display: flex;
-          gap: 40px;
+          gap: clamp(16px, 3vw, 40px);
           border-top: 1px solid rgba(13, 94, 61, 0.1);
           padding-top: 30px;
         }
@@ -162,17 +164,18 @@ export default function ArtisansProcessSection() {
           .artisan-container {
             gap: 40px;
           }
-          .story-title {
-            font-size: 3rem;
-          }
           .masonry-grid {
             grid-template-rows: 250px 250px;
           }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
+          .artisan-section {
+            padding: 40px 20px 60px;
+          }
           .artisan-container {
             grid-template-columns: 1fr;
+            gap: 30px;
           }
           .story-content {
             padding-right: 0;
@@ -189,11 +192,14 @@ export default function ArtisansProcessSection() {
             right: 0;
           }
           .masonry-grid {
-            grid-template-rows: 300px 300px;
+            grid-template-rows: 220px 220px;
           }
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 480px) {
+          .artisan-section {
+            padding: 24px 16px 40px;
+          }
           .masonry-grid {
             display: flex;
             flex-direction: column;

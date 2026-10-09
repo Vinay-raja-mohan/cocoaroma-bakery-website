@@ -21,8 +21,21 @@ export default function OurStoresSection() {
   const scrollingStores = [...stores, ...stores];
 
   return (
-    <section className="stores-section" style={{ padding: '5rem 0', backgroundColor: '#fff', overflow: 'hidden' }}>
+    <section className="stores-section">
       <style>{`
+        .stores-section {
+          padding: clamp(2rem, 5vw, 5rem) 0;
+          background-color: #fff;
+          overflow: hidden;
+        }
+
+        .stores-heading {
+          font-family: 'Playfair Display', serif;
+          color: #0D5E3D;
+          font-size: clamp(1.8rem, 5vw, 3rem);
+          margin: 0;
+        }
+
         .marquee-wrapper {
           width: 100%;
           overflow: hidden;
@@ -146,11 +159,27 @@ export default function OurStoresSection() {
           transform: translateY(-2px);
           box-shadow: 0 6px 20px rgba(13, 94, 61, 0.3);
         }
+
+        @media (max-width: 768px) {
+          .store-card {
+            min-width: 260px;
+          }
+          
+          .marquee-wrapper::before,
+          .marquee-wrapper::after {
+            width: 60px;
+          }
+
+          .find-stores-btn {
+            padding: 12px 30px;
+            font-size: 0.95rem;
+          }
+        }
       `}</style>
 
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h2 style={{ fontFamily: '"Playfair Display", serif', color: '#0D5E3D', fontSize: '3rem', margin: 0 }}>
+        <h2 className="stores-heading">
           Our Stores
         </h2>
       </div>

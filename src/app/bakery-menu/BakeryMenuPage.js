@@ -4,7 +4,7 @@ import './bakery-menu.css';
 import Link from 'next/link';
 import {
   regularCakes, cheesecakes, brownies, desserts, cupcakes,
-  uniqueCakes, kidsCakes, savouries, biscuits, breads,
+  uniqueCakes, kidsCakes, savouries, Cookies, breads,
   loveCakes, corporateCakes, teaTimeCakes, getAllProducts
 } from './data';
 
@@ -298,7 +298,7 @@ export default function BakeryMenuPage() {
 
 
         {/* ═══════════════════════════════════════════════
-            ROW 3: Kids Cakes | Savouries + Biscuits
+            ROW 3: Kids Cakes | Savouries + Cookies
         ═══════════════════════════════════════════════ */}
         <div className="bm-row bm-animate">
           {/* LEFT: Kids Cakes */}
@@ -316,7 +316,7 @@ export default function BakeryMenuPage() {
 
           <div className="bm-divider-v" />
 
-          {/* RIGHT: Savouries + Biscuits */}
+          {/* RIGHT: Savouries + Cookies */}
           <div className="bm-col bm-col-right bm-stacked">
             <div>
               <SectionHeading>Savouries</SectionHeading>
@@ -329,13 +329,13 @@ export default function BakeryMenuPage() {
             </div>
             <Divider />
             <div>
-              <SectionHeading>Biscuits</SectionHeading>
+              <SectionHeading>Cookies</SectionHeading>
               <div className="bm-circular-grid">
-                {biscuits.map(p => (
+                {Cookies.map(p => (
                   <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/biscuits" />
+              <ViewMoreButton href="/product/Cookies" />
             </div>
           </div>
         </div>

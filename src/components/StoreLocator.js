@@ -5,15 +5,11 @@ import Link from 'next/link';
 import { Store, MapPin } from 'lucide-react';
 
 const stores = [
-  { name: 'VV Nagar', loc: 'Beside Pure O Natural' },
-  { name: 'Chintal', loc: 'Near ST Martins School' },
-  { name: 'West Maredpally', loc: 'Sheshachalam Colony' },
-  { name: 'Ayyappa', loc: 'Ayyappa Society, Madhapur' },
-  { name: 'Moosapet', loc: 'Kukatpally' },
-  { name: 'Addagutta', loc: 'JNTU Campus' },
-  { name: 'SR Nagar', loc: 'Opp Sri Chaitanya Jr Clg' },
-  { name: 'AS RAO Nagar', loc: 'Anupuram Kapra' },
-  { name: 'Dulapally', loc: 'Dundigal Gandimaisamma' }
+  { name: 'VV Nagar', loc: 'Beside Pure O Natural', mapLink: 'https://maps.app.goo.gl/AvRakgYfHDuho4cL6' },
+  { name: 'Chintal', loc: 'Near ST Martins School', mapLink: 'https://maps.app.goo.gl/26X6AbY2dhAyzvgE9' },
+  { name: 'West Maredpally', loc: 'Sheshachalam Colony', mapLink: 'https://maps.app.goo.gl/nyrDQ4YvNtBqYX3q6' },
+  { name: 'Ayyappa', loc: 'Ayyappa Society, Madhapur', mapLink: 'https://maps.app.goo.gl/pRna8fQXh5CczE8e6' },
+  { name: 'Moosapet', loc: 'Kukatpally', mapLink: 'https://maps.app.goo.gl/g7x3B2Jo9z1S6whH9' },
 ];
 
 export default function OurStoresSection() {
@@ -86,16 +82,15 @@ export default function OurStoresSection() {
 
         .store-card {
           display: flex;
-          align-items: center;
-          gap: 12px;
+          align-items: flex-start;
+          gap: 14px;
           background-color: #FFF8E7;
           border: 1px solid #F5E6C8;
-          padding: 16px 24px;
+          padding: 16px 22px;
           border-radius: 12px;
           min-width: 320px;
           box-shadow: 0 4px 12px rgba(0,0,0,0.03);
           transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-          cursor: default;
         }
 
         .store-card:hover {
@@ -107,35 +102,60 @@ export default function OurStoresSection() {
         .store-icon-wrapper {
           background-color: #0D5E3D;
           color: white;
-          width: 48px;
-          height: 48px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          margin-top: 2px;
         }
 
         .store-info {
           display: flex;
           flex-direction: column;
+          gap: 3px;
         }
 
         .store-name {
           font-family: 'Inter', sans-serif;
           font-weight: 700;
           color: #111;
-          font-size: 1rem;
-          margin-bottom: 2px;
+          font-size: 0.95rem;
         }
 
         .store-loc {
           font-family: 'Inter', sans-serif;
-          font-size: 0.85rem;
-          color: #666;
+          font-size: 0.82rem;
+          color: #555;
           display: flex;
           align-items: center;
           gap: 4px;
+        }
+
+        .store-hours {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.78rem;
+          color: #777;
+        }
+
+        .store-directions-link {
+          font-family: 'Inter', sans-serif;
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: #0D5E3D;
+          text-decoration: none;
+          margin-top: 4px;
+          display: inline-flex;
+          align-items: center;
+          gap: 3px;
+          transition: color 0.2s;
+        }
+
+        .store-directions-link:hover {
+          color: #083D28;
+          text-decoration: underline;
         }
 
         .find-stores-btn {
@@ -190,13 +210,23 @@ export default function OurStoresSection() {
           {scrollingStores.map((store, idx) => (
             <div className="store-card" key={idx}>
               <div className="store-icon-wrapper">
-                <Store size={24} />
+                <Store size={22} />
               </div>
               <div className="store-info">
                 <span className="store-name">{store.name}</span>
                 <span className="store-loc">
-                  <MapPin size={14} color="#0D5E3D" /> {store.loc}
+                  <MapPin size={13} color="#0D5E3D" /> {store.loc}
                 </span>
+                {store.mapLink && (
+                  <a
+                    href={store.mapLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="store-directions-link"
+                  >
+                    Get Directions →
+                  </a>
+                )}
               </div>
             </div>
           ))}
@@ -205,8 +235,8 @@ export default function OurStoresSection() {
 
       {/* Button */}
       <div style={{ textAlign: 'center' }}>
-        <Link href="/locations" className="find-stores-btn">
-          Find Stores
+        <Link href="/stores" className="find-stores-btn">
+          View All Stores
         </Link>
       </div>
     </section>

@@ -180,21 +180,21 @@ const allDonuts = [
   makeItem('red-velvet-donut', 'Red Velvet', 80, '', '/images/Donuts/RedVelvet Donut/RedVelvet Donut.png')
 ];
 
-const allBiscuits = [
-  makeItem('fruit-biscuits', 'Fruit Biscuits', 180),
+const allCookies = [
+  makeItem('fruit-Cookies', 'Fruit Cookies', 180),
   makeItem('kesar-badam-pista', 'Kesar Badam Pista', 255),
   makeItem('plain-kaju', 'Plain Kaju', 220),
   makeItem('chocolate-kaju', 'Chocolate Kaju', 260),
   makeItem('osmania', 'Osmania', 150),
-  makeItem('moon-biscuits', 'Moon Biscuits', 135),
-  makeItem('ajwain-biscuits', 'Ajwain Biscuits', 150),
+  makeItem('moon-Cookies', 'Moon Cookies', 135),
+  makeItem('ajwain-Cookies', 'Ajwain Cookies', 150),
   makeItem('coconut-cookies', 'Coconut Cookies', 165),
   makeItem('butter-almond-sticks', 'Butter Almond Sticks', 320),
   makeItem('kesar-badam-pista-sticks', 'Kesar Badam Pista Sticks', 320),
   makeItem('chocolate-almond-sticks', 'Chocolate Almond Sticks', 320),
-  makeItem('double-chocolate-biscuit', 'Double Chocolate', 150),
-  makeItem('dry-fruit-biscuit', 'Dry Fruit', 150),
-  makeItem('oatmeal-biscuit', 'Oatmeal', 150),
+  makeItem('double-chocolate-Cookie', 'Double Chocolate', 150),
+  makeItem('dry-fruit-Cookie', 'Dry Fruit', 150),
+  makeItem('oatmeal-Cookie', 'Oatmeal', 150),
   makeItem('rose-pistachio', 'Rose Pistachio', 130)
 ];
 
@@ -241,7 +241,7 @@ export const CATEGORIES = [
   { id: 'unique-cakes', name: 'Unique Cakes', subtitle: 'Signature artisanal creations for the discerning palate.', image: '/images/icons/unique cakes.png', items: allUniqueCakes },
   { id: 'kids-cakes', name: 'Kids Cakes', subtitle: 'Playful themes and vibrant flavors for the little ones.', image: '/images/icons/Kids Cakes.png', items: allKidsCakes },
   { id: 'savouries', name: 'Savouries', subtitle: 'Warm, crispy, and perfectly seasoned baked snacks.', image: '/images/icons/saviouries.png', items: allSavouries },
-  { id: 'biscuits', name: 'Biscuits', subtitle: 'Traditional tea-time companions baked with care.', image: '/images/icons/cookies.png', items: allBiscuits },
+  { id: 'Cookies', name: 'Cookies', subtitle: 'Traditional tea-time companions baked with care.', image: '/images/icons/cookies.png', items: allCookies },
   { id: 'breads', name: 'Breads', subtitle: 'Freshly baked, soft, and wholesome artisanal breads.', image: '/images/icons/breads.png', items: allBreads },
   { id: 'tidbits', name: 'Tidbits', subtitle: 'Crunchy bites perfect for your evening cravings.', image: '/images/icons/tidbits.png', items: allTidbits },
   { id: 'tea-time-cakes', name: 'Tea Time Cakes', subtitle: 'Light, fluffy, and perfect with a warm cup of tea.', image: '/images/icons/tea time cakes.png', items: allTeaTimeCakes },
@@ -427,7 +427,7 @@ export const kidsCakes = [
 ];
 
 export const savouries = allSavouries.slice(0, 3);
-export const biscuits = allBiscuits.slice(0, 3);
+export const Cookies = allCookies.slice(0, 3);
 export const breads = allBreads.slice(0, 3);
 export const teaTimeCakes = allTeaTimeCakes.slice(0, 3);
 

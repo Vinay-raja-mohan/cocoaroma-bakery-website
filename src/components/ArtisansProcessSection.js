@@ -218,8 +218,8 @@ export default function ArtisansProcessSection() {
           
           <div className="masonry-item item-tall">
             <Image 
-              src="/images/categories/cake.jpg" 
-              alt="Artisan cake preparation" 
+              src="/images/Display images/1.png" 
+              alt="Handcrafted artisan bakery creations" 
               fill 
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 50vw"
@@ -228,8 +228,8 @@ export default function ArtisansProcessSection() {
           
           <div className="masonry-item item-top-right">
             <Image 
-              src="/images/categories/donut.jpg" 
-              alt="Freshly baked pastries" 
+              src="/images/Display images/2.png" 
+              alt="Freshly baked chocolate donut" 
               fill 
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 25vw"
@@ -238,10 +238,10 @@ export default function ArtisansProcessSection() {
           
           <div className="masonry-item item-bottom-right">
             <Image 
-              src="/images/categories/cake.jpg" 
-              alt="Fine ingredients" 
+              src="/images/Display images/3.png" 
+              alt="Handcrafted celebratory cake" 
               fill 
-              style={{ objectFit: 'cover', objectPosition: 'bottom' }}
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
               sizes="(max-width: 900px) 100vw, 25vw"
             />
           </div>

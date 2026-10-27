@@ -209,19 +209,19 @@ export const categories = [
     ]
   },
   {
-    id: 'biscuits',
-    name: 'Biscuits',
-    description: 'Crunchy, buttery biscuit selection',
+    id: 'Cookies',
+    name: 'Cookies',
+    description: 'Crunchy, buttery Cookie selection',
     icon: 'Cookie',
     items: [
-      { name: 'Fruit Biscuits', slug: null, weight: '350g', price: 180, hasImages: false },
+      { name: 'Fruit Cookies', slug: null, weight: '350g', price: 180, hasImages: false },
       { name: 'Kesar Badaam Pista', slug: null, weight: '350g', price: 255, hasImages: false },
       { name: 'Plain Kaju', slug: null, weight: '350g', price: 220, hasImages: false },
       { name: 'Chocolate Kaju', slug: null, weight: '350g', price: 260, hasImages: false },
       { name: 'Osmania', slug: null, weight: '300g', price: 150, hasImages: false },
-      { name: 'Moon Biscuits', slug: null, weight: '350g', price: 135, hasImages: false },
+      { name: 'Moon Cookies', slug: null, weight: '350g', price: 135, hasImages: false },
       { name: 'Ajwain Cookies', slug: null, weight: '300g', price: 135, hasImages: false },
-      { name: 'Coconut Biscuits', slug: null, weight: '300g', price: 150, hasImages: false },
+      { name: 'Coconut Cookies', slug: null, weight: '300g', price: 150, hasImages: false },
     ]
   },
   {
@@ -267,7 +267,7 @@ export const categories = [
       { name: 'Butter Sticks', slug: null, weight: '200g', price: 90, hasImages: false },
       { name: 'Methi Khari', slug: null, weight: '200g', price: 90, hasImages: false },
       { name: 'Palmiers', slug: null, weight: '200g', price: 90, hasImages: false },
-      { name: 'Cashew Biscuits', slug: null, weight: '200g', price: 170, hasImages: false },
+      { name: 'Cashew Cookies', slug: null, weight: '200g', price: 170, hasImages: false },
       { name: 'Multigrain Rusk', slug: null, weight: '250g', price: 100, hasImages: false },
     ]
   },

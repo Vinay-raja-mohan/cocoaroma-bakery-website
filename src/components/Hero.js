@@ -1,16 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Placeholder slides for now
   const slides = [
-    { id: 1, bgColor: '#E8F5E9', text: 'Slide 1 - Image will be available soon' },
-    { id: 2, bgColor: '#FFF0F3', text: 'Slide 2 - Image will be available soon' },
-    { id: 3, bgColor: '#F3E5F5', text: 'Slide 3 - Image will be available soon' },
+    { id: 1, image: '/images/Hero-Section/1.png', alt: 'Customized and Special Cakes - Cocoaroma Bakery' },
+    { id: 2, image: '/images/Hero-Section/2.png', alt: 'Puddings: Creamy, Indulgent, Irresistible - Cocoaroma Bakery' },
+    { id: 3, image: '/images/Hero-Section/3.png', alt: 'Garlic Bread: Soft, Cheesy, Irresistible - Cocoaroma Bakery' },
   ];
 
   useEffect(() => {
@@ -32,7 +32,15 @@ export default function Hero() {
     <section className="hero-slider" style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
       <style>{`
         .hero-slider {
-          height: min(calc(100vh - 110px), 600px);
+          height: calc(100vh - 76px);
+          min-height: 500px;
+        }
+
+        /* 15.6" Full HD (1920 x 1080) laptop responsive screen */
+        @media screen and (min-width: 1280px) and (max-width: 1920px) {
+          .hero-slider {
+            height: calc(100vh - 76px);
+          }
         }
         
         .slider-arrow {
@@ -112,18 +120,19 @@ export default function Hero() {
               left: 0,
               width: '100%', 
               height: '100%', 
-              backgroundColor: slide.bgColor,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
               opacity: currentSlide === index ? 1 : 0,
               transition: 'opacity 0.8s ease-in-out',
               zIndex: currentSlide === index ? 1 : 0
             }}
           >
-            <h2 className="slide-title">
-              {slide.text}
-            </h2>
+            <Image
+              src={slide.image}
+              alt={slide.alt}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+            />
           </div>
         ))}
       </div>

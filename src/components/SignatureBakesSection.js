@@ -19,7 +19,7 @@ const requestedCategories = [
   { name: 'Donuts', id: 'donuts', image: '/images/categories/donut.jpg' },
   { name: 'Desserts', id: 'desserts', image: '/images/categories/donut.jpg' },
   { name: 'Chocolates', id: 'chocolates', image: '/images/categories/donut.jpg' },
-  { name: 'Biscuits', id: 'biscuits', image: '/images/categories/donut.jpg' },
+  { name: 'Cookies', id: 'Cookies', image: '/images/categories/donut.jpg' },
   { name: 'Titbits', id: 'tidbits', image: '/images/categories/donut.jpg' },
   { name: 'Breads', id: 'breads', image: '/images/categories/donut.jpg' },
   { name: 'Tea Time Cakes', id: 'tea-time-cakes', image: '/images/categories/donut.jpg' },

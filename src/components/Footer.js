@@ -60,13 +60,37 @@ export default function Footer() {
           min-width: 250px;
         }
 
-        .footer-logo-text {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(1.5rem, 3vw, 2rem);
-          font-weight: 700;
-          color: #FFF8E7;
-          margin-bottom: 1rem;
+        .footer-logo-link {
           display: inline-block;
+          margin-bottom: 1.25rem;
+          text-decoration: none;
+          transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .footer-logo-link:hover {
+          transform: translateY(-2px);
+          opacity: 0.95;
+        }
+
+        .footer-logo-img {
+          width: 210px;
+          height: auto;
+          object-fit: contain;
+          display: block;
+        }
+
+        .footer-inline-logo {
+          display: inline-block;
+          vertical-align: -0.36em;
+          margin-right: 2px;
+          line-height: 1;
+        }
+
+        .footer-inline-logo-img {
+          height: 1.8em;
+          width: auto;
+          object-fit: contain;
+          display: block;
         }
 
         .footer-desc {
@@ -219,6 +243,14 @@ export default function Footer() {
             min-width: 100%; 
             text-align: center;
           }
+          .footer-logo-link {
+            display: inline-flex;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+          }
+          .footer-logo-img {
+            width: 180px;
+          }
           .social-links { justify-content: center; }
           .quick-links li { text-align: center; }
           .contact-item { justify-content: center; }
@@ -231,9 +263,26 @@ export default function Footer() {
         
         {/* Left Column */}
         <div className="footer-col-left">
-          <div className="footer-logo-text">Cocoaroma</div>
+          <Link href="/" className="footer-logo-link" aria-label="Cocoaroma Bakery Home">
+            <Image
+              src="/images/logo/footer-logo.png"
+              alt="Cocoaroma Bakery"
+              width={210}
+              height={77}
+              className="footer-logo-img"
+              priority
+            />
+          </Link>
           <p className="footer-desc">
-            Cocoaroma, the brand name of Sai Sree Foods Private Limited, has made a presence in the Hyderabad bakery segment since November 2019. Company with rich expertise in bakery product manufacturing and innovation. Starting with 3 stores in 2019, we are now a chain of 10+ offline stores across Hyderabad, marking our presence across all online food stores for online delivery of cakes and desserts. We are Happy and pleased that we have made a success of creating a product that meets our Customers Expectations in Quality, richness, and Satisfaction, with our sales rising exponentially since inception.
+            <span className="footer-inline-logo">
+              <Image
+                src="/images/logo/cocoaroma-wordmark.png"
+                alt="Cocoaroma"
+                width={100}
+                height={30}
+                className="footer-inline-logo-img"
+              />
+            </span> the brand name of Sai Sree Foods Private Limited, has made a presence in the Hyderabad bakery segment since November 2025. Company with rich expertise in bakery product manufacturing and innovation. Starting with 3 stores in 2025, we are now a chain of 10+ offline stores across Hyderabad, marking our presence across all online food stores for online delivery of cakes and desserts. We are Happy and pleased that we have made a success of creating a product that meets our Customers Expectations in Quality, richness, and Satisfaction, with our sales rising exponentially since inception.
           </p>
           <div className="social-links">
             <a href="#" className="social-btn"><InstagramIcon /></a>
@@ -269,7 +318,7 @@ export default function Footer() {
           </div>
 
           <div style={{ marginTop: '2rem' }}>
-            <h4 className="footer-title" style={{ marginBottom: '0.5rem' }}>Also Available on</h4>
+            <h4 className="footer-title" style={{ marginBottom: '0.5rem' }}>Get it delivered on</h4>
             <div className="available-box">
               <div className="app-btn swiggy">SWIGGY</div>
               <div className="app-btn zomato">ZOMATO</div>

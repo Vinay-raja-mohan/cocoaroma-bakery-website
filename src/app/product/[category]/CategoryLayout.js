@@ -69,7 +69,14 @@ export default function CategoryLayout({ categoryId }) {
               </div>
               <h3 className="pl-card-title">{product.name}</h3>
               <div className="pl-card-bottom">
-                <span className="pl-card-price">₹{Number(product.price).toFixed(2)}</span>
+                <span className="pl-card-price">
+                  ₹{Number(product.price).toLocaleString('en-IN')}
+                  {product.isCake && (
+                    <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#6B7280', marginLeft: '6px' }}>
+                      (0.5 Kg)
+                    </span>
+                  )}
+                </span>
               </div>
             </Link>
           ))}

@@ -20,7 +20,7 @@ export default function Home() {
   const featuredCategories = categories.slice(0, 4);
 
   return (
-    <div className="home-page" style={{ backgroundColor: '#FFF8E7', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <div className="home-page" style={{ backgroundColor: '#FFF8E7', minHeight: '100vh', paddingBottom: '4rem', overflowX: 'hidden', width: '100%', maxWidth: '100%' }}>
       <Hero />
       <ArtisansProcessSection />
       <SignatureBakesSection />
@@ -29,7 +29,7 @@ export default function Home() {
 
       <OurStoresSection />
 
-      <section className="testimonials-section container" style={{ padding: '4rem 0' }}>
+      <section className="testimonials-section container" style={{ padding: '4rem 0', overflow: 'hidden' }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <h2 style={{ fontFamily: '"Playfair Display", serif', color: '#0D5E3D', fontSize: '3rem', margin: 0 }}>
             Our Reviews

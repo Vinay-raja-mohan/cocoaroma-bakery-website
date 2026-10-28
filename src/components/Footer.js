@@ -33,7 +33,7 @@ const YoutubeIcon = () => (
 
 export default function Footer() {
   return (
-    <footer className="footer-section" style={{ backgroundColor: '#083D28', color: '#FFF8E7', position: 'relative', margin: 0 }}>
+    <footer id="footer" className="footer-section" style={{ backgroundColor: '#083D28', color: '#FFF8E7', position: 'relative', margin: 0 }}>
       <style>{`
         .footer-container {
           width: 80%;
@@ -73,22 +73,9 @@ export default function Footer() {
         }
 
         .footer-logo-img {
-          width: 210px;
+          width: 160px;
+          max-width: 100%;
           height: auto;
-          object-fit: contain;
-          display: block;
-        }
-
-        .footer-inline-logo {
-          display: inline-block;
-          vertical-align: -0.36em;
-          margin-right: 2px;
-          line-height: 1;
-        }
-
-        .footer-inline-logo-img {
-          height: 1.8em;
-          width: auto;
           object-fit: contain;
           display: block;
         }
@@ -99,6 +86,16 @@ export default function Footer() {
           line-height: 1.8;
           color: rgba(255, 255, 255, 0.8);
           margin-bottom: 1.5rem;
+        }
+
+        .footer-inline-wordmark {
+          display: inline-block;
+          vertical-align: -0.28em;
+          height: 20px;
+          width: auto;
+          max-width: 80px;
+          margin-right: 1px;
+          object-fit: contain;
         }
 
         .social-links {
@@ -249,7 +246,7 @@ export default function Footer() {
             margin: 0 auto 1.25rem;
           }
           .footer-logo-img {
-            width: 180px;
+            width: 140px;
           }
           .social-links { justify-content: center; }
           .quick-links li { text-align: center; }
@@ -267,22 +264,30 @@ export default function Footer() {
             <Image
               src="/images/logo/footer-logo.png"
               alt="Cocoaroma Bakery"
-              width={210}
-              height={77}
-              className="footer-logo-img"
+              width={160}
+              height={58}
               priority
+              style={{ width: '160px', height: 'auto', display: 'block' }}
+              className="footer-logo-img"
             />
           </Link>
           <p className="footer-desc">
-            <span className="footer-inline-logo">
-              <Image
-                src="/images/logo/cocoaroma-wordmark.png"
-                alt="Cocoaroma"
-                width={100}
-                height={30}
-                className="footer-inline-logo-img"
-              />
-            </span> the brand name of Sai Sree Foods Private Limited, has made a presence in the Hyderabad bakery segment since November 2025. Company with rich expertise in bakery product manufacturing and innovation. Starting with 3 stores in 2025, we are now a chain of 10+ offline stores across Hyderabad, marking our presence across all online food stores for online delivery of cakes and desserts. We are Happy and pleased that we have made a success of creating a product that meets our Customers Expectations in Quality, richness, and Satisfaction, with our sales rising exponentially since inception.
+            <Image
+              src="/images/logo/cocoaroma-wordmark.png"
+              alt="Cocoaroma"
+              width={80}
+              height={24}
+              className="footer-inline-wordmark"
+              style={{
+                display: 'inline-block',
+                verticalAlign: '-0.28em',
+                height: '20px',
+                width: 'auto',
+                maxWidth: '80px',
+                marginRight: '1px',
+                objectFit: 'contain'
+              }}
+            />, the brand name of Sai Sree Foods Private Limited, has made a presence in the Hyderabad bakery segment since November 2025. Company with rich expertise in bakery product manufacturing and innovation. Starting with 3 stores in 2025, we are now a chain of 10+ offline stores across Hyderabad, marking our presence across all online food stores for online delivery of cakes and desserts. We are Happy and pleased that we have made a success of creating a product that meets our Customers Expectations in Quality, richness, and Satisfaction, with our sales rising exponentially since inception.
           </p>
           <div className="social-links">
             <a href="#" className="social-btn"><InstagramIcon /></a>

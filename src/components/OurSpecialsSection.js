@@ -7,24 +7,24 @@ import Link from 'next/link';
 const specials = [
   {
     subtitle: 'PREMIUM CAKES',
-    title: 'Forever Collection',
-    description: 'Discover our Forever Collection - a timeless selection of cakes designed to capture the essence of love and celebration. Each bite is a memory in the making.',
-    image: '/images/cakes/red-velvet/1.png',
-    link: '/menu?category=regular-cakes'
+    title: 'Red Velvet Special',
+    description: 'Discover our signature Red Velvet creation - a timeless delicacy baked with rich crimson cocoa sponge and silky cream cheese frosting. Each bite is a memory in the making.',
+    image: '/images/Our-Specials/redvelvet.png',
+    link: '/product/unique-cakes/red-velvet'
   },
   {
-    subtitle: 'SIGNATURE DESSERTS',
-    title: 'Premium Rocher',
+    subtitle: 'SIGNATURE INDULGENCE',
+    title: 'Ferrero Rocher',
     description: 'Indulge in the ultimate hazelnut and chocolate experience. Rich, crunchy, and absolutely irresistible for any celebration.',
-    image: '/images/cakes/ferrero-rocher/1.png',
-    link: '/menu?category=regular-cakes'
+    image: '/images/Our-Specials/ferraro.png',
+    link: '/product/unique-cakes/ferrero-rocher'
   },
   {
     subtitle: 'SEASONAL DELIGHTS',
     title: 'Classic Tiramisu',
     description: 'A sophisticated coffee-flavored Italian dessert. Layers of light mascarpone cheese and rich cocoa for a perfect balance.',
-    image: '/images/cakes/tiramisu/1.png',
-    link: '/menu?category=regular-cakes'
+    image: '/images/Our-Specials/tiramisu.png',
+    link: '/product/regular-cakes/tiramisu'
   }
 ];
 
@@ -59,6 +59,9 @@ export default function OurSpecialsSection() {
           flex-direction: column;
           align-items: center;
           min-height: 500px;
+          overflow: hidden;
+          width: 100%;
+          box-sizing: border-box;
         }
 
         .section-header {
@@ -227,16 +230,21 @@ export default function OurSpecialsSection() {
 
       <div className="editorial-container">
         
-        {/* Left Side: Image */}
-        <div className={`editorial-image-wrapper ${fade ? 'fade' : ''}`} style={{ backgroundColor: '#FFF' }}>
+        {/* Left Side: Image (Clickable Link) */}
+        <Link 
+          href={currentSpecial.link}
+          className={`editorial-image-wrapper ${fade ? 'fade' : ''}`} 
+          style={{ backgroundColor: '#FFF', display: 'block', cursor: 'pointer' }}
+          title={`View ${currentSpecial.title}`}
+        >
           <Image 
             src={currentSpecial.image} 
             alt={currentSpecial.title} 
             fill 
-            style={{ objectFit: 'contain', padding: '20px' }}
+            style={{ objectFit: 'cover' }}
             priority
           />
-        </div>
+        </Link>
 
         {/* Right Side: Text Box (Overlapping) */}
         <div className={`editorial-text-box ${fade ? 'fade' : ''}`}>
@@ -246,7 +254,7 @@ export default function OurSpecialsSection() {
             {currentSpecial.description}
           </p>
           <Link href={currentSpecial.link} className="ed-btn">
-            VIEW FULL MENU
+            ORDER NOW
           </Link>
         </div>
 

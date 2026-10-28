@@ -1,234 +1,284 @@
 // All product data for the Cocoa Aroma Bakery Menu
+// Synchronized with official Cocoa Aroma bakery menu cards
 
-function makeItem(id, name, price, description = '', img = '') {
+function makeCake(id, name, smallPrice, largePrice, description = '', img = '', pastryPrice = null) {
+  const small = Number(smallPrice) || Math.round((Number(largePrice) || 1000) * 0.55);
+  const large = Number(largePrice) || Math.round((Number(smallPrice) || 600) * 1.8);
+
   return {
     id,
     name,
+    isCake: true,
+    price: small,
+    smallPrice: small,
+    largePrice: large,
+    pastryPrice: pastryPrice ? Number(pastryPrice) : null,
     description: description || name,
-    price,
     image: img || '/images/cakes/image-coming-soon.svg',
     imageFallback: '/images/cakes/image-coming-soon.svg',
   };
 }
 
+function makeItem(id, name, price, description = '', img = '', extra = {}) {
+  return {
+    id,
+    name,
+    isCake: false,
+    price: Number(price) || 0,
+    description: description || name,
+    image: img || '/images/cakes/image-coming-soon.svg',
+    imageFallback: '/images/cakes/image-coming-soon.svg',
+    ...extra,
+  };
+}
+
+// 1. Regular Cakes and Pastries (Menu Page 1)
 const allRegularCakes = [
-  makeItem('black-forest', 'Black Forest', 525, '', '/images/cakes/black-forest/1.png'),
-  makeItem('almond-chocolate', 'Almond Chocolate', 600, '', '/images/cakes/almond-chocolate/1.png'),
-  makeItem('cappuccino-chocolate', 'Cappuccino Chocolate', 600, '', '/images/cakes/cappuccino-chocolate/1.png'),
-  makeItem('chocochips', 'Chocochips', 530),
-  makeItem('choco-vanilla', 'Choco Vanilla', 450, '', '/images/cakes/choco-vanilla/1.png'),
-  makeItem('chocolate-loaded', 'Chocolate Loaded', 600, '', '/images/cakes/chocolate-loaded/1.png'),
-  makeItem('chocolate-loaded-butter-cream', 'Chocolate Loaded Butter Cream', 560, '', '/images/cakes/chocolate-loaded-butter-cream/1.png'),
-  makeItem('fresh-fruit', 'Fresh Fruit', 700),
-  makeItem('tiramisu', 'Tiramisu', 650, '', '/images/cakes/tiramisu/1.png'),
-  makeItem('mango-super-king', 'Mango Super King', 450, '', '/images/cakes/mango-super-king/1.png'),
-  makeItem('pineapple', 'Pineapple', 420, '', '/images/cakes/pineapple/1.png'),
-  makeItem('butterscotch', 'Butterscotch', 450, '', '/images/cakes/butterscotch/1.png'),
-  makeItem('butterscotch-chocolate', 'Butterscotch Chocolate', 450, '', '/images/cakes/butterscotch-chocolate/1.png'),
-  makeItem('strawberry', 'Strawberry', 420, '', '/images/cakes/strawberry/1.png'),
-  makeItem('strawberry-chocolate', 'Strawberry Chocolate', 550),
-  makeItem('blue-smash-cake', 'Blue Smash Cake', 800),
-  makeItem('pink-smash-cake', 'Pink Smash Cake', 800),
-  makeItem('white-chocolate', 'White Chocolate', 550, '', '/images/cakes/white-chocolate/1.png'),
-  makeItem('white-forest', 'White Forest', 500, '', '/images/cakes/white-forest/1.png'),
-  makeItem('kiwi-delight', 'Kiwi Delight', 450, '', '/images/cakes/kiwi-delight/1.png')
+  makeCake('black-forest', 'Black Forest', 525, 930, 'Classic chocolate sponge layered with whipped cream and cherries', '/images/cakes/black-forest/1.png', 80),
+  makeCake('almond-chocolate', 'Almond Chocolate', 600, 1050, 'Rich cocoa sponge with roasted almonds and chocolate ganache', '/images/cakes/almond-chocolate/1.png', 95),
+  makeCake('cappuccino-chocolate', 'Cappuccino Chocolate', 600, 1050, 'Espresso-infused sponge with velvety chocolate truffle', '/images/cakes/cappuccino-chocolate/1.png', 95),
+  makeCake('chocochips', 'Chocochips', 530, 950, 'Moist chocolate cake layered with crunchy chocolate chips', '', 75),
+  makeCake('choco-vanilla', 'Choco Vanilla', 450, 880, 'Harmonious blend of light vanilla and rich chocolate ganache', '/images/cakes/choco-vanilla/1.png', 80),
+  makeCake('chocolate-loaded', 'Chocolate Loaded', 600, 1050, 'Decadent cake overloaded with chocolate ganache and curls', '/images/cakes/chocolate-loaded/1.png', 95),
+  makeCake('chocolate-loaded-butter-cream', 'Chocolate Loaded Butter Cream', 560, 970, 'Old-fashioned chocolate cake finished with whipped buttercream', '/images/cakes/chocolate-loaded-butter-cream/1.png', 85),
+  makeCake('fresh-fruit', 'Fresh Fruit', 700, 1200, 'Tender vanilla sponge loaded with fresh seasonal fruits', '', 100),
+  makeCake('tiramisu', 'Tiramisu', 650, 1100, 'Italian-inspired coffee-soaked sponge with mascarpone cream', '/images/cakes/tiramisu/1.png', 100),
+  makeCake('mango-super-king', 'Mango Super King', 450, 800, 'Tropical Alphonso mango coulis layered with light cream', '/images/cakes/mango-super-king/1.png', 80),
+  makeCake('pineapple', 'Pineapple', 420, 800, 'Refreshing vanilla sponge soaked in juicy pineapple nectar', '/images/cakes/pineapple/1.png', 70),
+  makeCake('butterscotch', 'Butterscotch', 450, 850, 'Golden caramel layers paired with crunchy butterscotch praline', '/images/cakes/butterscotch/1.png', 80),
+  makeCake('butterscotch-chocolate', 'Butterscotch Chocolate', 450, 800, 'Rich chocolate sponge paired with crunchy butterscotch nuts', '/images/cakes/butterscotch-chocolate/1.png', null),
+  makeCake('strawberry', 'Strawberry', 420, 800, 'Delicate vanilla sponge layered with fragrant strawberry compote', '/images/cakes/strawberry/1.png', 70),
+  makeCake('strawberry-chocolate', 'Strawberry Chocolate', 550, 1000, 'Chocolate sponge layered with sweet strawberry cream', '', 75),
+  makeCake('blue-smash-cake', 'Blue Smash Cake', 800, 1500, 'Vibrant blue pinata smash cake for exciting celebrations', '', null),
+  makeCake('pink-smash-cake', 'Pink Smash Cake', 800, 1500, 'Festive pink pinata smash cake filled with sweet surprises', '', null),
+  makeCake('white-chocolate', 'White Chocolate', 550, 1000, 'Delicate vanilla sponge enveloped in silky white chocolate ganache', '/images/cakes/white-chocolate/1.png', 85),
+  makeCake('white-forest', 'White Forest', 500, 950, 'Vanilla sponge layered with juicy cherries and white chocolate curls', '/images/cakes/white-forest/1.png', 80),
+  makeCake('kiwi-delight', 'Kiwi Delight', 450, 800, 'Tangy tropical kiwi compote layered into soft vanilla sponge', '/images/cakes/kiwi-delight/1.png', null)
 ];
 
+// 2. Unique Cakes and Pastries (Menu Page 1)
 const allUniqueCakes = [
-  makeItem('all-topped-chocolate', 'All Topped Chocolate', 750),
-  makeItem('royale-truffle', 'Royal Truffle', 650, '', '/images/cakes/royale-truffle/1.png'),
-  makeItem('belgium-chocolate', 'Belgium Chocolate', 600, '', '/images/cakes/belgium-chocolate/1.png'),
-  makeItem('cocoaroma-spl-cake', 'Cocoaroma Spl Cake', 600),
-  makeItem('dry-fruit-vanilla', 'Dry Fruit Vanilla', 700),
-  makeItem('ferrero-rocher', 'Ferrero Rocher', 600, '', '/images/cakes/ferrero-rocher/1.png'),
-  makeItem('rabdi-pista-almond', 'Rabdi Pista Almond', 630, '', '/images/cakes/rabdi-pista-almond/1.png'),
-  makeItem('rainbow', 'Rainbow', 650),
-  makeItem('rasgulla', 'Rasgulla', 600),
-  makeItem('rasmalai', 'Rasmalai', 700, '', '/images/cakes/rasmalai/1.png'),
-  makeItem('red-velvet', 'Red Velvet', 550, '', '/images/cakes/red-velvet/1.png')
+  makeCake('all-topped-chocolate', 'All Topped Chocolate', 750, 1300, 'Luxurious cake crowned with assorted chocolate garnishes', '', null),
+  makeCake('royale-truffle', 'Royal Truffle', 650, 1050, 'Velvety truffle cream layered between rich chocolate sponge', '/images/cakes/royale-truffle/1.png', 99),
+  makeCake('belgium-chocolate', 'Belgium Chocolate', 600, 1150, 'Intensely rich cake crafted with pure Belgian cocoa', '/images/cakes/belgium-chocolate/1.png', 110),
+  makeCake('cocoaroma-spl-cake', 'Cocoaroma Spl Cake', 600, 1200, 'Our chef signature chocolate creation with secret recipe cream', '', 110),
+  makeCake('dry-fruit-vanilla', 'Dry Fruit Vanilla', 700, 1250, 'Vanilla sponge loaded with roasted almonds, cashews and pistachios', '', null),
+  makeCake('ferrero-rocher', 'Ferrero Rocher', 600, 1100, 'Hazelnut praline wafer crunch with rich cocoa mousse', '/images/cakes/ferrero-rocher/1.png', 110),
+  makeCake('rabdi-pista-almond', 'Rabdi Pista Almond', 630, 1150, 'Rich sponge infused with slow-simmered rabdi and pistachios', '/images/cakes/rabdi-pista-almond/1.png', 99),
+  makeCake('rainbow', 'Rainbow', 650, 1200, 'Vibrant multi-colored sponge layers frosted with sweet vanilla cream', '', 99),
+  makeCake('rasgulla', 'Rasgulla', 600, 1100, 'Sweet Indian rasgulla dumplings nestled in delicate bakery cream', '', 120),
+  makeCake('rasmalai', 'Rasmalai', 700, 1300, 'Royal saffron-cardamom rasmalai milk soaked into tender sponge', '/images/cakes/rasmalai/1.png', 120),
+  makeCake('red-velvet', 'Red Velvet', 550, 1030, 'Crimson cocoa-buttermilk sponge with smooth cream cheese frosting', '/images/cakes/red-velvet/1.png', 99)
 ];
 
+// 3. Kids Cakes (Menu Page 1 - Large 1 kg)
 const allKidsCakes = [
-  makeItem('kids-theme-1', 'Kids Theme 1 (Angry Bird)', 1300),
-  makeItem('kids-theme-2', 'Kids Theme 2 (Funny)', 1300),
-  makeItem('kids-theme-3', 'Kids Theme 3 (Pooh)', 1300),
-  makeItem('kids-theme-4', 'Kids Theme 4 (Barbie)', 1300),
-  makeItem('kids-theme-5', 'Kids Theme 5 (Car)', 1300),
-  makeItem('kids-theme-6', 'Kids Theme 6 (Bob Of Minions)', 1300),
-  makeItem('kids-theme-7', 'Kids Theme 7 (Stan Lee Spiderman)', 1500)
+  makeCake('kids-theme-1', 'Kids Theme 1 (Angry Bird)', 700, 1300, 'Exciting Angry Birds themed celebration cake', ''),
+  makeCake('kids-theme-2', 'Kids Theme 2 (Funny)', 700, 1300, 'Playful cartoon character celebration cake', ''),
+  makeCake('kids-theme-3', 'Kids Theme 3 (Pooh)', 700, 1300, 'Adorable Winnie the Pooh celebration cake', ''),
+  makeCake('kids-theme-4', 'Kids Theme 4 (Barbie)', 700, 1300, 'Glamorous Barbie doll dress themed celebration cake', ''),
+  makeCake('kids-theme-5', 'Kids Theme 5 (Car)', 700, 1300, 'Thrilling race car themed birthday cake', ''),
+  makeCake('kids-theme-6', 'Kids Theme 6 (Bob Of Minions)', 700, 1300, 'Cheery Bob the Minion themed celebration cake', ''),
+  makeCake('kids-theme-7', 'Kids Theme 7 (Stan Lee Spiderman)', 800, 1500, 'Superhero Spiderman themed grand celebration cake', '')
 ];
 
+// 4. Love Cakes (Heart Shaped) (Menu Page 1 - Small 1/2 kg: 699, Large: 1200)
 const allLoveCakes = [
-  makeItem('beloved', 'Beloved', 699, '', '/images/cakes/beloved/1.png'),
-  makeItem('sweet-heart', 'Sweet Heart', 699, '', '/images/cakes/sweet-heart/1.png'),
-  makeItem('love-crush', 'Love Crush', 699),
-  makeItem('french-hearts', 'French Hearts', 699),
-  makeItem('love', 'Love', 699)
+  makeCake('beloved', 'Beloved', 699, 1200, 'Heart shaped pink cream cake with delicate white chocolate roses', '/images/cakes/beloved/1.png'),
+  makeCake('sweet-heart', 'Sweet Heart', 699, 1200, 'Romantic heart-shaped cake layered with velvety red velvet sponge', '/images/cakes/sweet-heart/1.png'),
+  makeCake('love-crush', 'Love Crush', 699, 1200, 'Heart shaped chocolate cake adorned with red cocoa glaze', ''),
+  makeCake('french-hearts', 'French Hearts', 699, 1200, 'Heart shaped cake with delicate French vanilla and chocolate', ''),
+  makeCake('love', 'Love', 699, 1200, 'Artisan heart shaped cake baked specially for romantic celebrations', '')
 ];
 
+// 5. Corporate Cakes (Menu Page 1 - Large 1 kg)
 const allCorporateCakes = [
-  makeItem('choco-praline', 'Choco Praline', 1200, '', '/images/cakes/choco-praline/1.png'),
-  makeItem('chocolate-nutty', 'Chocolate Nutty', 1200),
-  makeItem('death-by-chocolate', 'Death By Chocolate', 1200),
-  makeItem('frosted', 'Frosted', 1200),
-  makeItem('loaded-rocher', 'Loaded Rocher', 1200, '', '/images/cakes/loaded-rocher/1.png'),
-  makeItem('pinata-black', 'Pinata Black', 1500),
-  makeItem('pinata-red', 'Pinata Red', 1500)
+  makeCake('choco-praline', 'Choco Praline', 650, 1200, 'Sophisticated chocolate ganache embedded with caramelized almond praline', '/images/cakes/choco-praline/1.png'),
+  makeCake('chocolate-nutty', 'Chocolate Nutty', 650, 1200, 'Rich chocolate sponge packed with assorted roasted nuts', ''),
+  makeCake('death-by-chocolate', 'Death By Chocolate', 650, 1200, 'Triple layer chocolate overload for grand office milestones', ''),
+  makeCake('frosted', 'Frosted', 650, 1200, 'Elegantly frosted professional celebration cake', ''),
+  makeCake('loaded-rocher', 'Loaded Rocher', 650, 1200, 'Grand corporate cake loaded with hazelnut Ferrero Rocher truffles', '/images/cakes/loaded-rocher/1.png'),
+  makeCake('pinata-black', 'Pinata Black', 800, 1500, 'Sleek black smash pinata cake for corporate events and team parties', ''),
+  makeCake('pinata-red', 'Pinata Red', 800, 1500, 'Vibrant red smash pinata cake with hammer for team milestones', '')
 ];
 
+// 6. Cheesecakes (Menu Page 1 - Small: 850, Large: 1400)
 const allCheesecakes = [
-  makeItem('blueberry-cheesecake', 'Blueberry Cheesecake', 850, '', '/images/Cheese Cakes/Blue Berry Cheese Cake/Blue Berry Cheese Cake.png'),
-  { ...makeItem('biscoff-cheesecake', 'Biscoff Cheesecake', 850, '', '/images/Cheese Cakes/Biscoff Cheese Cake/Biscoff Cheese Cake.png'), imageScale: 1.2 },
-  makeItem('red-velvet-cheesecake', 'Red Velvet Cheesecake', 850, '', '/images/Cheese Cakes/Red Velvet Cheese Cake/Red Velvet Cheese Cake.png'),
-  { ...makeItem('nutella-cheesecake', 'Nutella Cheesecake', 850, '', '/images/Cheese Cakes/Nutella Cheese Cake/Nutella Cheese Cake.png'), imageScale: 1.2 }
+  makeCake('blueberry-cheesecake', 'Blueberry Cheesecake', 850, 1400, 'Velvety New York cheesecake topped with wild blueberry compote', '/images/Cheese Cakes/Blue Berry Cheese Cake/Blue Berry Cheese Cake.png', 170),
+  { ...makeCake('biscoff-cheesecake', 'Biscoff Cheesecake', 850, 1400, 'Creamy cheesecake infused with spiced Lotus Biscoff cookie butter', '/images/Cheese Cakes/Biscoff Cheese Cake/Biscoff Cheese Cake.png', 170), imageScale: 1.2 },
+  makeCake('red-velvet-cheesecake', 'Red Velvet Cheesecake', 850, 1400, 'New York cheesecake swirled over tender red velvet sponge', '/images/Cheese Cakes/Red Velvet Cheese Cake/Red Velvet Cheese Cake.png', 170),
+  { ...makeCake('nutella-cheesecake', 'Nutella Cheesecake', 850, 1400, 'Ultra-creamy cheesecake loaded with rich hazelnut Nutella', '/images/Cheese Cakes/Nutella Cheese Cake/Nutella Cheese Cake.png', 170), imageScale: 1.2 }
 ];
 
+// 7. Gifting Cakes - 600 gm (Menu Page 1 - 800)
 const allGiftingCakes = [
-  makeItem('forever-1', 'Forever 1', 800),
-  makeItem('forever-2', 'Forever 2', 800),
-  makeItem('forever-3', 'Forever 3', 800),
-  makeItem('forever-4', 'Forever 4', 800),
-  makeItem('forever-5', 'Forever 5', 800)
+  makeItem('forever-1', 'Forever 1', 800, 'Elegant 600 gm celebratory gifting cake', '', { weight: '600 gm' }),
+  makeItem('forever-2', 'Forever 2', 800, 'Handcrafted 600 gm anniversary gifting cake', '', { weight: '600 gm' }),
+  makeItem('forever-3', 'Forever 3', 800, 'Artisan 600 gm chocolate gifting cake', '', { weight: '600 gm' }),
+  makeItem('forever-4', 'Forever 4', 800, 'Gourmet 600 gm celebration gift cake', '', { weight: '600 gm' }),
+  makeItem('forever-5', 'Forever 5', 800, 'Signature 600 gm luxury gifting cake', '', { weight: '600 gm' })
 ];
 
+// 8. Brownies (Menu Page 1)
 const allBrownies = [
-  makeItem('choco-chip-brownie', 'Choco Chip Brownie', 80, '', '/images/Brownies/ChocoChip Brownie/ChocoChip Brownie.png'),
-  makeItem('walnut-brownie', 'Walnut Brownie', 80, '', '/images/Brownies/Walnut Brownie/Walnut Brownie.png'),
-  makeItem('nutella-brownie', 'Nutella Brownie', 100, '', '/images/Brownies/Nutella Brownie/Nutella Brownie.png')
+  makeItem('choco-chip-brownie', 'Choco Chip Brownie', 80, 'Dense fudgy chocolate brownie with chocolate chips', '/images/Brownies/ChocoChip Brownie/ChocoChip Brownie.png', { portion: '1 Piece' }),
+  makeItem('walnut-brownie', 'Walnut Brownie', 80, 'Rich chocolate brownie packed with toasted walnuts', '/images/Brownies/Walnut Brownie/Walnut Brownie.png', { portion: '1 Piece' }),
+  makeItem('nutella-brownie', 'Nutella Brownie', 100, 'Decadent brownie generously topped with hazelnut Nutella', '/images/Brownies/Nutella Brownie/Nutella Brownie.png', { portion: '1 Piece' })
 ];
 
+// 9. Cupcakes (Menu Page 1)
 const allCupcakes = [
-  makeItem('belgium-cupcake', 'Belgium Cupcake', 65, '', '/images/Cupcakes/Belgium Cupcake/Belgium Cupcake.png'),
-  makeItem('blueberry-cupcake', 'Blueberry Cupcake', 65, '', '/images/Cupcakes/BlueBerry Cupcake/BlueBerry Cupcake.png'),
-  makeItem('hazelnut-truffle', 'Hazelnut Truffle', 65, '', '/images/Cupcakes/Hazelnut Cupcake/Hazelnut Cupcake.png'),
-  makeItem('red-velvet-cupcake', 'Red Velvet Cupcake', 75, '', '/images/Cupcakes/RedVelvet Cupcake/RedVelvet Cupcake.png'),
-  makeItem('vanilla-cream-frosting', 'Vanilla Cream Frosting', 65, '', '/images/Cupcakes/VanillaFrosting Cupcake/VanillaFrosting Cupcake.png')
+  makeItem('belgium-cupcake', 'Belgium Cupcake', 65, 'Rich Belgian chocolate cupcake with swirl frosting', '/images/Cupcakes/Belgium Cupcake/Belgium Cupcake.png', { portion: '1 Piece' }),
+  makeItem('blueberry-cupcake', 'Blueberry Cupcake', 65, 'Vanilla cupcake with real blueberry buttercream', '/images/Cupcakes/BlueBerry Cupcake/BlueBerry Cupcake.png', { portion: '1 Piece' }),
+  makeItem('raspberry-cupcake', 'Raspberry Cupcake', 65, 'Sweet raspberry frosted cupcake', '', { portion: '1 Piece' }),
+  makeItem('hazelnut-truffle', 'Hazelnut Truffle', 65, 'Nutty hazelnut truffle frosted cupcake', '/images/Cupcakes/Hazelnut Cupcake/Hazelnut Cupcake.png', { portion: '1 Piece' }),
+  makeItem('red-velvet-cupcake', 'Red Velvet Cupcake', 75, 'Classic red velvet frosted cupcake with cream cheese', '/images/Cupcakes/RedVelvet Cupcake/RedVelvet Cupcake.png', { portion: '1 Piece' }),
+  makeItem('vanilla-cream-frosting', 'Vanilla Cream Frosting', 65, 'Vanilla cupcake with silky whipped frosting', '/images/Cupcakes/VanillaFrosting Cupcake/VanillaFrosting Cupcake.png', { portion: '1 Piece' })
 ];
 
+// 10. Savouries (Menu Page 2)
 const allSavouries = [
-  makeItem('veg-patties', 'Veg Patties', 35),
-  makeItem('paneer-patties', 'Paneer Patties', 40),
-  makeItem('mushroom-patties', 'Mushroom Patties', 40),
-  makeItem('paneer-chilli-roll', 'Paneer Chilli Roll', 35),
-  makeItem('palak-paneer-roll', 'Palak Paneer Roll', 35),
-  makeItem('gobi-manchurian-roll', 'Gobi Manchurian Roll', 35),
-  makeItem('paneer-kulcha-roll', 'Paneer Kulcha Roll', 35),
-  makeItem('baby-pizza', 'Baby Pizza', 75),
-  makeItem('white-bread-vegetable-sandwich', 'White Bread Vegetable Sandwich', 50),
-  makeItem('brown-bread-vegetable-sandwich', 'Brown Bread Vegetable Sandwich', 50),
-  makeItem('double-cheese-garlic-bread', 'Double Cheese Garlic Bread', 65),
-  makeItem('cream-bun', 'Cream Bun', 25),
-  makeItem('dilpasand', 'Dilpasand', 25),
-  makeItem('dilkhush', 'Dilkhush', 30)
+  makeItem('veg-patties', 'Veg Patties', 35, 'Crispy golden flaky patty with spiced potato and vegetables', '', { portion: '1 Piece' }),
+  makeItem('paneer-patties', 'Paneer Patties', 40, 'Crispy flaky puff stuffed with spiced cottage cheese', '', { portion: '1 Piece' }),
+  makeItem('mushroom-patties', 'Mushroom Patties', 40, 'Golden puff stuffed with seasoned mushrooms and herbs', '', { portion: '1 Piece' }),
+  makeItem('paneer-chilli-roll', 'Paneer Chilli Roll', 35, 'Spicy Indo-Chinese paneer filling rolled in flaky pastry', '', { portion: '1 Piece' }),
+  makeItem('palak-paneer-roll', 'Palak Paneer Roll', 35, 'Nutritious spinach and paneer baked roll', '', { portion: '1 Piece' }),
+  makeItem('gobi-manchurian-roll', 'Gobi Manchurian Roll', 35, 'Crispy gobi manchurian wrapped in baked crust', '', { portion: '1 Piece' }),
+  makeItem('paneer-kulcha-roll', 'Paneer Kulcha Roll', 35, 'Oven-baked kulcha stuffed with spiced cottage cheese', '', { portion: '1 Piece' }),
+  makeItem('baby-pizza', 'Baby Pizza', 75, 'Personal mini pizza topped with cheese and fresh vegetables', '', { portion: '1 Piece' }),
+  makeItem('white-bread-vegetable-sandwich', 'White Bread Vegetable Sandwich', 50, 'Fresh vegetable sandwich on soft white bread', '', { portion: '1 Piece' }),
+  makeItem('brown-bread-vegetable-sandwich', 'Brown Bread Vegetable Sandwich', 50, 'Wholesome vegetable sandwich on whole wheat brown bread', '', { portion: '1 Piece' }),
+  makeItem('double-cheese-garlic-bread', 'Double Cheese Garlic Bread', 65, 'Toasted artisan garlic bread loaded with double mozzarella', '', { portion: '1 Piece' }),
+  makeItem('cream-bun', 'Cream Bun', 25, 'Soft bakery bun filled with sweet vanilla cream', '', { portion: '1 Piece' }),
+  makeItem('dilpasand', 'Dilpasand', 25, 'Traditional puff stuffed with sweet coconut and tutti-frutti', '', { portion: '1 Piece' }),
+  makeItem('dilkhush', 'Dilkhush', 30, 'Delightful spiced sweet coconut bakery pastry', '', { portion: '1 Piece' })
 ];
 
+// 11. Desserts (Menu Page 2)
 const allDesserts = [
-  makeItem('chocolate-lava', 'Chocolate Lava', 75),
-  makeItem('dark-mousse', 'Dark Mousse', 90, '', '/images/Desserts/dark mousse/dark mousse.png'),
-  makeItem('kitkat-mousse', 'Kitkat Mousse', 90, '', '/images/Desserts/kitkat mousse/kitkat mousse.png'),
-  makeItem('trio-mousse', 'Trio Mousse', 90, '', '/images/Desserts/trio mousse/trio mousse.png')
+  makeItem('chocolate-lava', 'Chocolate Lava', 75, 'Warm chocolate cake with a molten truffle center', '', { portion: '1 Cup' }),
+  makeItem('dark-mousse', 'Dark Mousse', 90, 'Silky dark chocolate mousse cup', '/images/Desserts/dark mousse/dark mousse.png', { portion: '1 Cup' }),
+  makeItem('kitkat-mousse', 'Kitkat Mousse', 90, 'Creamy mousse layered with crunchy KitKat chunks', '/images/Desserts/kitkat mousse/kitkat mousse.png', { portion: '1 Cup' }),
+  makeItem('trio-mousse', 'Trio Mousse', 90, 'Three delicate layers of white, milk and dark chocolate mousse', '/images/Desserts/trio mousse/trio mousse.png', { portion: '1 Cup' }),
+  makeItem('apple-pie', 'Apple Pie', 85, 'Spiced cinnamon apple filling in a flaky buttery crust', '', { portion: '1 Slice' }),
+  makeItem('honey-coconut-slice', 'Honey Coconut Slice', 85, 'Moist honey cake slice topped with toasted coconut', '', { portion: '1 Slice' }),
+  makeItem('nutella-frosted-slice', 'Nutella Frosted Slice', 170, 'Indulgent cake slice smothered in pure Nutella ganache', '', { portion: '1 Slice' }),
+  makeItem('pistachio-tres-leches', 'Pistachio Tres Leches', 170, 'Mexican sponge soaked in three milks infused with Iranian pistachios', '', { portion: '1 Tub' }),
+  makeItem('rose-tres-leches', 'Rose Tres Leches', 170, 'Fragrant rose milk soaked sponge with whipped cream', '', { portion: '1 Tub' })
 ];
 
+// 12. Pastries (Single-serve slices from Menu Page 1)
 const allPastries = [
-  makeItem('angry-bird-pastry', 'Angry Bird Pastry', 80, '', '/images/Pastries/Angry Bird Pastry/Angry Bird Pastry.png'),
-  makeItem('black-forest-pastry', 'Black Forest Pastry', 80, '', '/images/Pastries/Black Forest Pastry/Black Forest Pastry.png'),
-  makeItem('butterscotch-pastry', 'Butterscotch Pastry', 80, '', '/images/Pastries/ButterScotch Pastry/ButterScotch Pastry.png'),
-  makeItem('cappuccino-chocolate-pastry', 'Cappuccino Chocolate Pastry', 95, '', '/images/Pastries/cappuccino chocolate Pastry/cappuccino chocolate Pastry.png'),
-  makeItem('choco-chips-pastry', 'Choco Chips Pastry', 75, '', '/images/Pastries/Choco Chips pastry/Choco Chips pastry.png'),
-  makeItem('choco-vanilla-pastry', 'Choco Vanilla Pastry', 80, '', '/images/Pastries/Choco Vanilla Pastry/Choco Vanilla Pastry.png'),
-  makeItem('double-chocolate-pastry', 'Double Chocolate Pastry', 95, '', '/images/Pastries/Double Chocolate Pastry/Double Chocolate Pastry.png'),
-  makeItem('fresh-fruit-pastry', 'Fresh Fruit Pastry', 100, '', '/images/Pastries/Fresh Fruit Pastry/Fresh Fruit Pastry.png'),
-  makeItem('gulabjam-pastry', 'Gulabjam Pastry', 120, '', '/images/Pastries/Gulabjam Pastry/Gulabjam Pastry.png'),
-  makeItem('italian-tiramisu-pastry', 'Italian Tiramisu Pastry', 100, '', '/images/Pastries/Italian Tiramisu Pastry/Italian Tiramisu Pastry.png'),
-  makeItem('mango-superaja-pastry', 'Mango Superaja Pastry', 80, '', '/images/Pastries/Mango Superaja Pastry/Mango Superaja Pastry.png'),
-  makeItem('panda-pastry', 'Panda Pastry', 80, '', '/images/Pastries/Panda Pastry/Panda Pastry.png'),
-  makeItem('pineapple-pastry', 'Pineapple Pastry', 70, '', '/images/Pastries/Pineapple Pastry/Pineapple Pastry.png'),
-  makeItem('rabdi-pista-almond-pastry', 'Rabdi Pista Almond Pastry', 99, '', '/images/Pastries/Rabdi Pista Almond Pastry/Rabdi Pista Almond Pastry.png'),
-  makeItem('rasagulla-pastry', 'Rasagulla Pastry', 120, '', '/images/Pastries/Rasagulla Pastry/Rasagulla Pastry.png'),
-  makeItem('red-velvet-pastry', 'Red Velvet Pastry', 99, '', '/images/Pastries/Red Velvet pastry/Red Velvet pastry.png'),
-  makeItem('roacher-pastry', 'Roacher Pastry', 110, '', '/images/Pastries/Roacher Pastry/Roacher Pastry.png'),
-  makeItem('royale-truffle-pastry', 'Royale Truffle Pastry', 99, '', '/images/Pastries/Royale Truffle Pastry/Royale Truffle Pastry.png'),
-  makeItem('special-pastry', 'Special Pastry', 110, '', '/images/Pastries/Special Pastry/Special Pastry.png'),
-  makeItem('strawberry-chocolate-pastry', 'Strawberry Chocolate Pastry', 75, '', '/images/Pastries/StrawBerry Chocolate Pastry/StrawBerry Chocolate Pastry.png'),
-  makeItem('strawberry-delight-pastry', 'Strawberry Delight Pastry', 70, '', '/images/Pastries/Strawberry Delight Pastry/Strawberry Delight Pastry.png'),
-  makeItem('white-chocolate-pastry', 'White Chocolate Pastry', 85, '', '/images/Pastries/White Chocoalate Pastry/White Chocoalate Pastry.png'),
-  makeItem('white-forest-pastry', 'White Forest Pastry', 80, '', '/images/Pastries/White Forest Pastry/White Forest Pastry.png')
+  makeItem('black-forest-pastry', 'Black Forest Pastry', 80, 'Single slice of classic Black Forest cake', '/images/Pastries/Black Forest Pastry/Black Forest Pastry.png', { portion: '1 Slice' }),
+  makeItem('almond-chocolate-pastry', 'Almond Chocolate Pastry', 95, 'Single slice of Almond Chocolate cake', '', { portion: '1 Slice' }),
+  makeItem('cappuccino-chocolate-pastry', 'Cappuccino Chocolate Pastry', 95, 'Single slice of Cappuccino Chocolate cake', '/images/Pastries/cappuccino chocolate Pastry/cappuccino chocolate Pastry.png', { portion: '1 Slice' }),
+  makeItem('choco-chips-pastry', 'Choco Chips Pastry', 75, 'Single slice of Chocochips cake', '/images/Pastries/Choco Chips pastry/Choco Chips pastry.png', { portion: '1 Slice' }),
+  makeItem('choco-vanilla-pastry', 'Choco Vanilla Pastry', 80, 'Single slice of Choco Vanilla cake', '/images/Pastries/Choco Vanilla Pastry/Choco Vanilla Pastry.png', { portion: '1 Slice' }),
+  makeItem('double-chocolate-pastry', 'Double Chocolate Pastry', 95, 'Single slice of chocolate loaded pastry', '/images/Pastries/Double Chocolate Pastry/Double Chocolate Pastry.png', { portion: '1 Slice' }),
+  makeItem('fresh-fruit-pastry', 'Fresh Fruit Pastry', 100, 'Single slice of fresh fruit cake', '/images/Pastries/Fresh Fruit Pastry/Fresh Fruit Pastry.png', { portion: '1 Slice' }),
+  makeItem('italian-tiramisu-pastry', 'Italian Tiramisu Pastry', 100, 'Single slice of authentic tiramisu', '/images/Pastries/Italian Tiramisu Pastry/Italian Tiramisu Pastry.png', { portion: '1 Slice' }),
+  makeItem('mango-superaja-pastry', 'Mango Super King Pastry', 80, 'Single slice of Mango Super King cake', '/images/Pastries/Mango Superaja Pastry/Mango Superaja Pastry.png', { portion: '1 Slice' }),
+  makeItem('pineapple-pastry', 'Pineapple Pastry', 70, 'Single slice of juicy pineapple cake', '/images/Pastries/Pineapple Pastry/Pineapple Pastry.png', { portion: '1 Slice' }),
+  makeItem('butterscotch-pastry', 'Butterscotch Pastry', 80, 'Single slice of crunchy butterscotch cake', '/images/Pastries/ButterScotch Pastry/ButterScotch Pastry.png', { portion: '1 Slice' }),
+  makeItem('strawberry-delight-pastry', 'Strawberry Pastry', 70, 'Single slice of strawberry delight cake', '/images/Pastries/Strawberry Delight Pastry/Strawberry Delight Pastry.png', { portion: '1 Slice' }),
+  makeItem('strawberry-chocolate-pastry', 'Strawberry Chocolate Pastry', 75, 'Single slice of strawberry chocolate cake', '/images/Pastries/StrawBerry Chocolate Pastry/StrawBerry Chocolate Pastry.png', { portion: '1 Slice' }),
+  makeItem('white-chocolate-pastry', 'White Chocolate Pastry', 85, 'Single slice of white chocolate cake', '/images/Pastries/White Chocoalate Pastry/White Chocoalate Pastry.png', { portion: '1 Slice' }),
+  makeItem('white-forest-pastry', 'White Forest Pastry', 80, 'Single slice of White Forest cake', '/images/Pastries/White Forest Pastry/White Forest Pastry.png', { portion: '1 Slice' }),
+  makeItem('royale-truffle-pastry', 'Royale Truffle Pastry', 99, 'Single slice of decadent royal truffle cake', '/images/Pastries/Royale Truffle Pastry/Royale Truffle Pastry.png', { portion: '1 Slice' }),
+  makeItem('belgium-chocolate-pastry', 'Belgium Chocolate Pastry', 110, 'Single slice of rich Belgium chocolate cake', '', { portion: '1 Slice' }),
+  makeItem('special-pastry', 'Special Pastry', 110, 'Single slice of Cocoaroma special cake', '/images/Pastries/Special Pastry/Special Pastry.png', { portion: '1 Slice' }),
+  makeItem('roacher-pastry', 'Ferrero Rocher Pastry', 110, 'Single slice of Ferrero Rocher cake', '/images/Pastries/Roacher Pastry/Roacher Pastry.png', { portion: '1 Slice' }),
+  makeItem('rabdi-pista-almond-pastry', 'Rabdi Pista Almond Pastry', 99, 'Single slice of Rabdi Pista Almond cake', '/images/Pastries/Rabdi Pista Almond Pastry/Rabdi Pista Almond Pastry.png', { portion: '1 Slice' }),
+  makeItem('rainbow-pastry', 'Rainbow Pastry', 99, 'Single slice of colorful rainbow cake', '', { portion: '1 Slice' }),
+  makeItem('rasagulla-pastry', 'Rasgulla Pastry', 120, 'Single slice of rasgulla fusion cake', '/images/Pastries/Rasagulla Pastry/Rasagulla Pastry.png', { portion: '1 Slice' }),
+  makeItem('gulabjam-pastry', 'Rasmalai Pastry', 120, 'Single slice of rasmalai fusion cake', '/images/Pastries/Gulabjam Pastry/Gulabjam Pastry.png', { portion: '1 Slice' }),
+  makeItem('red-velvet-pastry', 'Red Velvet Pastry', 99, 'Single slice of Red Velvet cake', '/images/Pastries/Red Velvet pastry/Red Velvet pastry.png', { portion: '1 Slice' }),
+  makeItem('blueberry-cheesecake-slice', 'Blueberry Cheesecake Slice', 170, 'Single slice of blueberry cheesecake', '', { portion: '1 Slice' }),
+  makeItem('biscoff-cheesecake-slice', 'Biscoff Cheesecake Slice', 170, 'Single slice of Biscoff cheesecake', '', { portion: '1 Slice' }),
+  makeItem('red-velvet-cheesecake-slice', 'Red Velvet Cheesecake Slice', 170, 'Single slice of Red Velvet cheesecake', '', { portion: '1 Slice' }),
+  makeItem('nutella-cheesecake-slice', 'Nutella Cheesecake Slice', 170, 'Single slice of Nutella cheesecake', '', { portion: '1 Slice' })
 ];
 
+// 13. Chocolates (Menu Page 2)
 const allChocolates = [
-  makeItem('chocolate-box-150', 'Chocolate Box (150 grams)', 300),
-  makeItem('chocolate-box-250', 'Chocolate Box (250 grams)', 500),
-  makeItem('assorted-chocolates', 'Assorted Chocolates (Per Piece)', 20),
-  makeItem('chocolate-bouquet', 'Chocolate Bouquet', 250),
-  makeItem('hamper-1', 'Hamper 1', 450),
-  makeItem('hamper-2', 'Hamper 2', 550),
-  makeItem('hamper-3', 'Hamper 3', 650),
-  makeItem('hamper-4', 'Hamper 4', 1000),
-  makeItem('hamper-5', 'Hamper 5', 1500),
-  makeItem('hamper-6', 'Hamper 6', 2000)
+  makeItem('chocolate-box-150', 'Chocolate Box (150 grams)', 300, 'Handcrafted artisan chocolate box (150g)', '', { weight: '150 g' }),
+  makeItem('chocolate-box-250', 'Chocolate Box (250 grams)', 500, 'Luxury assorted handcrafted chocolate box (250g)', '', { weight: '250 g' }),
+  makeItem('assorted-chocolates', 'Assorted Chocolates (Per Piece)', 20, 'Single handcrafted premium chocolate truffle', '', { unit: 'Per Piece' }),
+  makeItem('chocolate-bouquet', 'Chocolate Bouquet', 250, 'Festive bouquet made with fine chocolate truffles', '', { unit: '1 Bouquet' }),
+  makeItem('hamper-1', 'Hamper 1', 450, 'Festive gift hamper of artisan chocolates and treats', '', { unit: '1 Hamper' }),
+  makeItem('hamper-2', 'Hamper 2', 550, 'Celebration hamper with assorted treats and truffles', '', { unit: '1 Hamper' }),
+  makeItem('hamper-3', 'Hamper 3', 650, 'Deluxe chocolate celebration hamper', '', { unit: '1 Hamper' }),
+  makeItem('hamper-4', 'Hamper 4', 1000, 'Grand luxury gift hamper packed with fine goodies', '', { unit: '1 Hamper' }),
+  makeItem('hamper-5', 'Hamper 5', 1500, 'Executive gift hamper with premium chocolates and bakes', '', { unit: '1 Hamper' }),
+  makeItem('hamper-6', 'Hamper 6', 2000, 'Royal luxury festive gift hamper', '', { unit: '1 Hamper' })
 ];
 
+// 14. Donuts (Menu Page 2 - all 80)
 const allDonuts = [
-  makeItem('double-chocolate-donut', 'Double Chocolate', 80, '', '/images/Donuts/Double Chocolate Donut/Double Chocolate Donut.png'),
-  makeItem('kitkat-chocolate-donut', 'Kitkat Chocolate', 80, '', '/images/Donuts/Kitkat donut/Kitkat donut.png'),
-  makeItem('nutella-donut', 'Nutella', 80, '', '/images/Donuts/nutella Divine Donut/nutella Divine Donut.png'),
-  makeItem('oreo-ring-donut', 'Oreo Ring', 80, '', '/images/Donuts/Oreo Donut/Oreo Donut.png'),
-  makeItem('chocolate-mousse-donut', 'Chocolate Mousse', 80, '', '/images/Donuts/Truffle Donut/Truffle Donut.png'),
-  makeItem('truffle-chocolate-donut', 'Truffle Chocolate', 80, '', '/images/Donuts/Truffle Chocolate Donut/Truffle Chocolate Donut.png'),
-  makeItem('white-sprinkle-donut', 'White Sprinkle', 80, '', '/images/Donuts/white sprinkle donut/white sprinkle donut.png'),
-  makeItem('caramel-almond-donut', 'Caramel Almond', 80, '', '/images/Donuts/caremel donut/caremel donut.png'),
-  makeItem('red-velvet-donut', 'Red Velvet', 80, '', '/images/Donuts/RedVelvet Donut/RedVelvet Donut.png')
+  makeItem('double-chocolate-donut', 'Double Chocolate', 80, 'Soft glazed donut dipped in double chocolate', '/images/Donuts/Double Chocolate Donut/Double Chocolate Donut.png', { portion: '1 Piece' }),
+  makeItem('kitkat-chocolate-donut', 'Kitkat Chocolate', 80, 'Chocolate glazed donut topped with KitKat crunch', '/images/Donuts/Kitkat donut/Kitkat donut.png', { portion: '1 Piece' }),
+  makeItem('nutella-donut', 'Nutella', 80, 'Fluffy ring smothered in rich hazelnut Nutella', '/images/Donuts/nutella Divine Donut/nutella Divine Donut.png', { portion: '1 Piece' }),
+  makeItem('oreo-ring-donut', 'Oreo Ring', 80, 'Vanilla frosted ring topped with Oreo crumble', '/images/Donuts/Oreo Donut/Oreo Donut.png', { portion: '1 Piece' }),
+  makeItem('chocolate-mousse-donut', 'Truffle', 80, 'Decadent chocolate truffle filled donut ring', '/images/Donuts/Truffle Donut/Truffle Donut.png', { portion: '1 Piece' }),
+  makeItem('white-sprinkle-donut', 'White Sprinkle', 80, 'White chocolate glazed donut with colorful sprinkles', '/images/Donuts/white sprinkle donut/white sprinkle donut.png', { portion: '1 Piece' }),
+  makeItem('coffee-donut', 'Coffee', 80, 'Glazed donut with rich espresso coffee glaze', '', { portion: '1 Piece' }),
+  makeItem('caramel-almond-donut', 'Caramel Almond', 80, 'Salted caramel glaze topped with roasted almonds', '/images/Donuts/caremel donut/caremel donut.png', { portion: '1 Piece' }),
+  makeItem('hazelnut-donut', 'Hazelnut', 80, 'Rich hazelnut praline glaze on fluffy donut', '', { portion: '1 Piece' })
 ];
 
+// 15. Biscuits / Cookies (Menu Page 2)
 const allCookies = [
-  makeItem('fruit-Cookies', 'Fruit Cookies', 180),
-  makeItem('kesar-badam-pista', 'Kesar Badam Pista', 255),
-  makeItem('plain-kaju', 'Plain Kaju', 220),
-  makeItem('chocolate-kaju', 'Chocolate Kaju', 260),
-  makeItem('osmania', 'Osmania', 150),
-  makeItem('moon-Cookies', 'Moon Cookies', 135),
-  makeItem('ajwain-Cookies', 'Ajwain Cookies', 150),
-  makeItem('coconut-cookies', 'Coconut Cookies', 165),
-  makeItem('butter-almond-sticks', 'Butter Almond Sticks', 320),
-  makeItem('kesar-badam-pista-sticks', 'Kesar Badam Pista Sticks', 320),
-  makeItem('chocolate-almond-sticks', 'Chocolate Almond Sticks', 320),
-  makeItem('double-chocolate-Cookie', 'Double Chocolate', 150),
-  makeItem('dry-fruit-Cookie', 'Dry Fruit', 150),
-  makeItem('oatmeal-Cookie', 'Oatmeal', 150),
-  makeItem('rose-pistachio', 'Rose Pistachio', 130)
+  makeItem('fruit-Cookies', 'Fruit Biscuits', 180, 'Traditional crunchy biscuits packed with tutti frutti', '', { weight: '350 g' }),
+  makeItem('kesar-badam-pista', 'Kesar Badam Pista', 255, 'Aromatic saffron butter cookies with almonds and pistachios', '', { weight: '350 g' }),
+  makeItem('plain-kaju', 'Plain Kaju', 220, 'Rich butter biscuits infused with crushed cashews', '', { weight: '350 g' }),
+  makeItem('chocolate-kaju', 'Chocolate Kaju', 260, 'Decadent cocoa cookies loaded with crunchy cashews', '', { weight: '350 g' }),
+  makeItem('osmania', 'Osmania', 150, 'Iconic Hyderabad sweet & salty tea biscuits', '', { weight: '300 g' }),
+  makeItem('moon-Cookies', 'Moon Biscuits', 135, 'Melt-in-mouth crescent shaped shortbread cookies', '', { weight: '250 g' }),
+  makeItem('ajwain-Cookies', 'Ajwain Biscuits', 150, 'Savory digestive carom seed tea biscuits', '', { weight: '300 g' }),
+  makeItem('coconut-cookies', 'Coconut Cookies', 165, 'Crispy golden cookies with desiccated toasted coconut', '', { weight: '300 g' }),
+  makeItem('butter-almond-sticks', 'Butter Almond Sticks', 320, 'Crispy buttery pastry sticks studded with sliced almonds', '', { weight: '250 g' }),
+  makeItem('kesar-badam-pista-sticks', 'Kesar Badam Pista Sticks', 320, 'Fragrant saffron and nut pastry sticks', '', { weight: '250 g' }),
+  makeItem('chocolate-almond-sticks', 'Chocolate Almond Sticks', 320, 'Flaky chocolate sticks loaded with roasted almonds', '', { weight: '250 g' }),
+  makeItem('double-chocolate-Cookie', 'Double Chocolate', 150, 'Intensely chocolatey cookies with dark chocolate chips', '', { weight: '200 g' }),
+  makeItem('dry-fruit-Cookie', 'Dry Fruit', 150, 'Nutritious cookies loaded with assorted dry fruits', '', { weight: '200 g' }),
+  makeItem('oatmeal-Cookie', 'Oatmeal', 150, 'Wholesome rolled oat cookies baked with butter', '', { weight: '200 g' }),
+  makeItem('rose-pistachio', 'Rose Pistachio', 130, 'Fragrant Persian rose essence and pistachio cookies', '', { weight: '200 g' })
 ];
 
+// 16. Tidbits (Menu Page 2)
 const allTidbits = [
-  makeItem('twisted-khari', 'Twisted Khari', 90),
-  makeItem('butter-toast', 'Butter Toast', 90),
-  makeItem('butter-sticks', 'Butter Sticks', 90),
-  makeItem('methi-khari', 'Methi Khari', 90),
-  makeItem('palmiers', 'Palmiers', 90),
-  makeItem('cashew-rusk', 'Cashew Rusk', 170),
-  makeItem('multigrain-rusk', 'Multigrain Rusk', 100)
+  makeItem('twisted-khari', 'Twisted Khari', 90, 'Twisted flaky puff pastry bites', '', { weight: '200 g' }),
+  makeItem('butter-toast', 'Butter Toast', 90, 'Crunchy double-baked butter toast', '', { weight: '200 g' }),
+  makeItem('butter-sticks', 'Butter Sticks', 90, 'Crispy buttery snack sticks', '', { weight: '200 g' }),
+  makeItem('methi-khari', 'Methi Khari', 90, 'Fenugreek-infused savory layered puff', '', { weight: '200 g' }),
+  makeItem('palmiers', 'Palmiers', 90, 'Elephant ear French puff pastry with caramelized sugar', '', { weight: '200 g' }),
+  makeItem('cashew-rusk', 'Cashew Rusk', 170, 'Crisp golden rusks enriched with cashews', '', { weight: '250 g' }),
+  makeItem('multigrain-rusk', 'Multigrain Rusk', 100, 'Healthy crisp rusks made with multigrain flour', '', { weight: '250 g' })
 ];
 
+// 17. Breads (Menu Page 2)
 const allBreads = [
-  makeItem('white-bread', 'White Bread', 45),
-  makeItem('brown-bread', 'Brown Bread', 50),
-  makeItem('multigrain-bread', 'Multigrain Bread', 70),
-  makeItem('jumbo-bread', 'Jumbo Bread', 120),
-  makeItem('burger-bun', 'Burger Bun', 50),
-  makeItem('hot-dog', 'Hot Dog', 50),
-  makeItem('pizza-base', 'Pizza Base', 60),
-  makeItem('whole-wheat-pizza-base', 'Whole Wheat Pizza Base', 70),
-  makeItem('pav-bun', 'Pav Bun', 50),
-  makeItem('focaccia', 'Focaccia', 60)
+  makeItem('white-bread', 'White Bread', 45, 'Soft, cloud-like sandwich loaf baked fresh daily', '', { weight: '400 g' }),
+  makeItem('brown-bread', 'Brown Bread', 50, 'Wholesome wheat sandwich loaf rich in dietary fiber', '', { weight: '400 g' }),
+  makeItem('multigrain-bread', 'Multigrain Bread', 70, 'Nutrient-rich loaf packed with wholesome seeds and grains', '', { weight: '400 g' }),
+  makeItem('jumbo-bread', 'Jumbo Bread', 120, 'Extra-large sandwich loaf ideal for big families', '', { weight: '600 g' }),
+  makeItem('burger-bun', 'Burger Bun', 50, 'Soft golden burger buns with sesame seeds', '', { unit: '2 Pc' }),
+  makeItem('hot-dog', 'Hot Dog', 50, 'Classic elongated soft rolls for delicious hotdogs', '', { unit: '2 Pc' }),
+  makeItem('pizza-base', 'Pizza Base', 60, 'Ready-to-bake handcrafted thin pizza base', '', { unit: '2 Pc' }),
+  makeItem('whole-wheat-pizza-base', 'Whole Wheat Pizza Base', 70, 'Healthy whole wheat thin pizza base', '', { unit: '2 Pc' }),
+  makeItem('pav-bun', 'Pav Bun', 50, 'Super-soft pillowy dinner rolls for pav bhaji and vada pav', '', { unit: '6 Pc' }),
+  makeItem('focaccia', 'Focaccia', 60, 'Italian herb bread baked with extra virgin olive oil', '', { weight: '200 g' })
 ];
 
+// 18. Tea Time Cakes (Menu Page 2)
 const allTeaTimeCakes = [
-  makeItem('mawa-cake', 'Mawa Cake', 80),
-  makeItem('chocochips-cake-150', 'Chocochips Cake (150g)', 90),
-  makeItem('chocochips-cake-250', 'Chocochips Cake (250g)', 150),
-  makeItem('fruit-cake', 'Fruit Cake', 150),
-  makeItem('marble-cake', 'Marble Cake', 150),
-  makeItem('plum-cake', 'Plum Cake', 150),
-  makeItem('walnut-banana-cake', 'Walnut Banana Cake', 160)
+  makeItem('mawa-cake', 'Mawa Cake', 80, 'Rich Parsi-style mawa cake with cardamom and pistachios', '', { weight: '150 g' }),
+  makeItem('chocochips-cake-150', 'Chocochips Cake (150g)', 90, 'Soft tea cake loaded with chocolate chips', '', { weight: '150 g' }),
+  makeItem('chocochips-cake-250', 'Chocochips Cake (250g)', 150, 'Generous 250g tea cake with rich chocolate chips', '', { weight: '250 g' }),
+  makeItem('fruit-cake', 'Fruit Cake', 150, 'Traditional golden loaf packed with tutti frutti and candied fruits', '', { weight: '250 g' }),
+  makeItem('marble-cake', 'Marble Cake', 150, 'Vanilla and chocolate swirl butter sponge loaf', '', { weight: '250 g' }),
+  makeItem('plum-cake', 'Plum Cake', 150, 'Rich aromatic spice cake studded with soaked dry fruits', '', { weight: '250 g' }),
+  makeItem('walnut-banana-cake', 'Walnut Banana Cake', 160, 'Moist banana bread cake packed with toasted walnuts', '', { weight: '300 g' })
 ];
 
 export const CATEGORIES = [
@@ -262,210 +312,21 @@ export const getProductById = (id) => {
   return getAllProducts().find(p => p.id === id);
 };
 
-
 // --- FEATURED EXPORTS FOR BAKERY MENU PAGE ---
-export const regularCakes = [
-  {
-    id: 'black-forest',
-    name: 'Black Forest',
-    description: 'Classic rich black forest cake',
-    price: 525,
-    badge: 'BEST SELLER',
-    image: '/images/cakes/black-forest/1.png',
-    imageFallback: '/images/cakes/black-forest/1.jpg',
-  },
-  {
-    id: 'almond-chocolate',
-    name: 'Almond Chocolate',
-    description: 'Rich almond chocolate delight',
-    price: 600,
-    badge: 'NEW',
-    image: '/images/cakes/almond-chocolate/1.png',
-    imageFallback: '/images/cakes/almond-chocolate/1.jpg',
-  }
-];
-
-export const cheesecakes = [
-  {
-    id: 'blueberry-cheesecake',
-    name: 'Blueberry Cheesecake',
-    description: 'Classic creamy blueberry cheesecake',
-    price: 850,
-    image: '/images/Cheese Cakes/Blue Berry Cheese Cake/Blue Berry Cheese Cake.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'biscoff-cheesecake',
-    name: 'Biscoff Cheesecake',
-    description: 'Rich biscoff flavor',
-    price: 850,
-    image: '/images/Cheese Cakes/Biscoff Cheese Cake/Biscoff Cheese Cake.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-    imageScale: 1.2,
-  }
-];
-
-export const brownies = [
-  {
-    id: 'choco-chip-brownie',
-    name: 'Choco Chip Brownie',
-    description: 'Rich fudgy brownie with chocochips',
-    price: 80,
-    image: '/images/Brownies/ChocoChip Brownie/ChocoChip Brownie.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'walnut-brownie',
-    name: 'Walnut Brownie',
-    description: 'Classic walnut infused brownie',
-    price: 80,
-    image: '/images/Brownies/Walnut Brownie/Walnut Brownie.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'nutella-brownie',
-    name: 'Nutella Brownie',
-    description: 'Decadent nutella goodness',
-    price: 100,
-    image: '/images/Brownies/Nutella Brownie/Nutella Brownie.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  }
-];
-
-export const desserts = [
-  {
-    id: 'dark-mousse',
-    name: 'Dark Mousse',
-    description: 'Silky dark chocolate mousse',
-    price: 90,
-    image: '/images/Desserts/dark mousse/dark mousse.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'kitkat-mousse',
-    name: 'Kitkat Mousse',
-    description: 'Creamy mousse with crunchy KitKat',
-    price: 90,
-    image: '/images/Desserts/kitkat mousse/kitkat mousse.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'trio-mousse',
-    name: 'Trio Mousse',
-    description: 'Three layers of chocolate heaven',
-    price: 90,
-    image: '/images/Desserts/trio mousse/trio mousse.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  }
-];
-
-export const cupcakes = [
-  {
-    id: 'belgium-cupcake',
-    name: 'Belgium Cupcake',
-    description: 'Premium belgium chocolate cupcake',
-    price: 65,
-    image: '/images/Cupcakes/Belgium Cupcake/Belgium Cupcake.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'blueberry-cupcake',
-    name: 'Blueberry Cupcake',
-    description: 'Sweet blueberry topped cupcake',
-    price: 65,
-    image: '/images/Cupcakes/BlueBerry Cupcake/BlueBerry Cupcake.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'red-velvet-cupcake',
-    name: 'Red Velvet Cupcake',
-    description: 'Classic red velvet frosted cupcake',
-    price: 75,
-    image: '/images/Cupcakes/RedVelvet Cupcake/RedVelvet Cupcake.png',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  }
-];
-
-export const uniqueCakes = [
-  {
-    id: 'belgium-chocolate',
-    name: 'Belgium Chocolate',
-    description: 'Rich belgium chocolate indulgence',
-    price: 600,
-    badge: 'BEST SELLER',
-    image: '/images/cakes/belgium-chocolate/1.png',
-    imageFallback: '/images/cakes/belgium-chocolate/1.jpg',
-  },
-  {
-    id: 'royale-truffle',
-    name: 'Royal Truffle',
-    description: 'Decadent royal truffle cake',
-    price: 650,
-    badge: 'NEW',
-    image: '/images/cakes/royale-truffle/1.png',
-    imageFallback: '/images/cakes/royale-truffle/1.jpg',
-  }
-];
-
-export const kidsCakes = [
-  {
-    id: 'kids-theme-1',
-    name: 'Kids Theme 1 (Angry Bird)',
-    description: 'Fun & colorful theme cake',
-    price: 1300,
-    image: '/images/cakes/image-coming-soon.svg',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  },
-  {
-    id: 'kids-theme-2',
-    name: 'Kids Theme 2 (Funny)',
-    description: 'Playful character design',
-    price: 1300,
-    image: '/images/cakes/image-coming-soon.svg',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  }
-];
-
+export const regularCakes = allRegularCakes.slice(0, 3);
+export const cheesecakes = allCheesecakes.slice(0, 3);
+export const brownies = allBrownies.slice(0, 3);
+export const desserts = allDesserts.slice(0, 3);
+export const cupcakes = allCupcakes.slice(0, 3);
+export const uniqueCakes = allUniqueCakes.slice(0, 2);
+export const kidsCakes = allKidsCakes.slice(0, 2);
 export const savouries = allSavouries.slice(0, 3);
 export const Cookies = allCookies.slice(0, 3);
 export const breads = allBreads.slice(0, 3);
 export const teaTimeCakes = allTeaTimeCakes.slice(0, 3);
-
-export const loveCakes = [
-  {
-    id: 'sweet-heart',
-    name: 'Sweet Heart',
-    description: 'Beautiful heart shaped cake',
-    price: 699,
-    badge: 'BEST SELLER',
-    image: '/images/cakes/sweet-heart/1.png',
-    imageFallback: '/images/cakes/sweet-heart/1.jpg',
-  },
-  {
-    id: 'beloved',
-    name: 'Beloved',
-    description: 'Romantic design',
-    price: 699,
-    image: '/images/cakes/image-coming-soon.svg',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  }
-];
-
-export const corporateCakes = [
-  {
-    id: 'choco-praline',
-    name: 'Choco Praline',
-    description: 'Premium corporate cake',
-    price: 1200,
-    image: '/images/cakes/choco-praline/1.png',
-    imageFallback: '/images/cakes/choco-praline/1.jpg',
-  },
-  {
-    id: 'pinata-black',
-    name: 'Pinata Black',
-    description: 'Fun breakable cake',
-    price: 1500,
-    image: '/images/cakes/image-coming-soon.svg',
-    imageFallback: '/images/cakes/image-coming-soon.svg',
-  }
-];
+export const loveCakes = allLoveCakes.slice(0, 2);
+export const corporateCakes = allCorporateCakes.slice(0, 2);
+export const giftingCakes = allGiftingCakes.slice(0, 2);
+export const chocolates = allChocolates.slice(0, 2);
+export const donuts = allDonuts.slice(0, 2);
+export const pastries = allPastries.slice(0, 3);

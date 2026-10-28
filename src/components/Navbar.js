@@ -119,7 +119,7 @@ export default function Navbar() {
         .nav-logo-img {
           object-fit: contain;
           transition: transform 0.3s ease, width 0.3s ease;
-          width: 180px;
+          width: 150px;
           height: auto;
         }
 
@@ -438,13 +438,13 @@ export default function Navbar() {
 
         @media (max-width: 1536px) and (min-width: 1025px) {
           .nav-links { gap: clamp(20px, 2vw, 32px); }
-          .nav-logo-img { width: 160px; }
+          .nav-logo-img { width: 135px; }
         }
 
         @media (max-width: 1024px) {
           .nav-links { display: none; }
           .hamburger { display: flex; }
-          .nav-logo-img { width: 140px; }
+          .nav-logo-img { width: 120px; }
         }
 
         @media (max-width: 767px) {
@@ -461,7 +461,7 @@ export default function Navbar() {
             display: none;
           }
           .nav-container { padding: 0 20px; }
-          .nav-logo-img { width: 120px; }
+          .nav-logo-img { width: 105px; }
         }
 
         @media (max-width: 480px) {
@@ -475,9 +475,11 @@ export default function Navbar() {
           <Image
             src="/images/logo/logo.jpg"
             alt="Cocoaroma Logo"
-            width={180}
-            height={48}
-            sizes="(max-width: 767px) 120px, (max-width: 1024px) 140px, 180px"
+            width={150}
+            height={40}
+            priority
+            style={{ height: 'auto' }}
+            sizes="(max-width: 767px) 105px, (max-width: 1024px) 120px, 150px"
             className="nav-logo-img"
           />
         </Link>

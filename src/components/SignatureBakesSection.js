@@ -56,11 +56,12 @@ export default function SignatureBakesSection() {
         }
 
         .signature-container {
-          max-width: 100%;
-          margin: 0px 100px;
+          max-width: 1350px;
+          width: 100%;
+          margin: 0 auto;
           display: grid;
-          grid-template-columns: 420px 1fr;
-          gap: 40px;
+          grid-template-columns: 380px 1fr;
+          gap: 36px;
           align-items: start;
           box-sizing: border-box;
         }
@@ -283,20 +284,22 @@ export default function SignatureBakesSection() {
           box-shadow: 0 4px 15px rgba(13, 94, 61, 0.2);
         }
 
-        @media (max-width: 1280px) {
+        @media (max-width: 1400px) {
           .signature-container {
             grid-template-columns: 320px 1fr;
-            margin: 0 60px;
+            gap: 24px;
           }
           .signature-grid {
             grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
           }
         }
 
         @media (max-width: 1024px) {
           .signature-container {
             grid-template-columns: 1fr;
-            margin: 0 20px;
+            margin: 0 auto;
+            padding: 0 10px;
           }
           .signature-left {
             position: relative;

@@ -19,6 +19,11 @@
   padding: 0;
 }
 
+html {
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   width: 100%;

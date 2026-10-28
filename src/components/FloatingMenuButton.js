@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 export default function FloatingMenuButton() {
   const pathname = usePathname();
 
-  if (pathname === '/bakery-menu') {
+  if (pathname === '/bakery-menu' || pathname?.startsWith('/product')) {
     return null;
   }
 

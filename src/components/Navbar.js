@@ -54,14 +54,16 @@ export default function Navbar() {
       <header
         className="navbar-header"
         style={{
-          position: 'sticky',
+          position: 'fixed',
           top: 0,
+          left: 0,
+          right: 0,
           zIndex: 1000,
           width: '100%',
           transition: 'all 0.3s ease',
           backgroundColor: '#FFF',
           borderBottom: isScrolled ? '1px solid #eee' : '1px solid transparent',
-          boxShadow: isScrolled ? '0 2px 12px rgba(0,0,0,0.06)' : 'none',
+          boxShadow: isScrolled ? '0 2px 12px rgba(0,0,0,0.08)' : 'none',
           padding: isScrolled ? '10px 0' : '14px 0',
         }}
       >
@@ -608,6 +610,7 @@ export default function Navbar() {
         <Link href="/about" className={`mobile-link ${pathname === '/about' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
       </div>
     </header>
+      <div className="navbar-spacer" aria-hidden="true" style={{ height: '73px' }} />
     </>
   );
 }

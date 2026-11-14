@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './bakery-menu.css';
 import Link from 'next/link';
 import {
@@ -28,6 +28,12 @@ function Stars({ rating }) {
 function ImgWithFallback({ src, fallback, alt, className, style }) {
   const [imgSrc, setImgSrc] = useState(src);
   const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    setImgSrc(src);
+    setFailed(false);
+  }, [src]);
+
   const handleError = useCallback(() => {
     if (!failed && fallback && imgSrc !== fallback) {
       setImgSrc(fallback);
@@ -162,7 +168,7 @@ function Header() {
           <path d="M0 9 Q15 18 30 9 Q45 0 60 9" stroke="#C89A3A" strokeWidth="1" fill="none"/>
         </svg>
       </div>
-      <h1 className="bm-logo-brand">Cocoa Aroma</h1>
+      <h1 className="bm-logo-brand">Cocoaroma</h1>
       <div className="bm-logo-sub">Bakery</div>
       <div className="bm-logo-tagline">Pure Veg. Pure Delight.</div>
       <div style={{ marginTop: 12 }}>

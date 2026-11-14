@@ -76,6 +76,16 @@ export default function CategoryLayout({ categoryId }) {
                       (0.5 Kg)
                     </span>
                   )}
+                  {product.portion && (
+                    <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#6B7280', marginLeft: '6px' }}>
+                      ({product.portion})
+                    </span>
+                  )}
+                  {product.weight && (
+                    <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#6B7280', marginLeft: '6px' }}>
+                      ({product.weight})
+                    </span>
+                  )}
                 </span>
               </div>
             </Link>

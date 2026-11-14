@@ -98,10 +98,10 @@ export const categories = [
     description: 'Rich & creamy cheesecake collection',
     icon: 'Cheese',
     items: [
-      { name: 'Blueberry Cheesecake', slug: null, pastry: 170, small: 850, large: 1400, hasImages: false },
-      { name: 'Biscoff Cheesecake', slug: null, pastry: 170, small: 850, large: 1400, hasImages: false },
-      { name: 'Red Velvet Cheesecake', slug: null, pastry: 170, small: 850, large: 1400, hasImages: false },
-      { name: 'Nutella Cheesecake', slug: null, pastry: 170, small: 850, large: 1400, hasImages: false },
+      { name: 'Blueberry Cheesecake', slug: null, pastry: null, small: null, large: null, price: 170, portion: '1 Piece', hasImages: true },
+      { name: 'Biscoff Cheesecake', slug: null, pastry: null, small: null, large: null, price: 170, portion: '1 Piece', hasImages: true },
+      { name: 'Red Velvet Cheesecake', slug: null, pastry: null, small: null, large: null, price: 170, portion: '1 Piece', hasImages: true },
+      { name: 'Nutella Cheesecake', slug: null, pastry: null, small: null, large: null, price: 170, portion: '1 Piece', hasImages: true },
     ]
   },
   {

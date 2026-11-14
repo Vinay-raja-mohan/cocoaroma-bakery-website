@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import SearchModal from './SearchModal';
 
 const ourProductsMenu = [
   {
@@ -33,7 +34,19 @@ const ourProductsMenu = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -554,7 +567,8 @@ export default function Navbar() {
           <button
             className="nav-action-btn"
             aria-label="Search"
-            title="Search"
+            title="Search products (Ctrl+K)"
+            onClick={() => setSearchOpen(true)}
           >
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="8"></circle>
@@ -577,6 +591,35 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+        {/* Mobile Search Button */}
+        <div style={{ marginBottom: '16px' }}>
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setSearchOpen(true);
+            }}
+            style={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '12px 16px',
+              backgroundColor: '#f7faf8',
+              border: '1px solid #e0eae4',
+              borderRadius: '8px',
+              color: '#666',
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              textAlign: 'left'
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D5E3D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>Search cakes, snacks...</span>
+          </button>
+        </div>
         <Link href="/" className={`mobile-link ${pathname === '/' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Home</Link>
         
         <div className="mobile-dropdown-title">Our Products</div>
@@ -611,6 +654,7 @@ export default function Navbar() {
       </div>
     </header>
       <div className="navbar-spacer" aria-hidden="true" style={{ height: '73px' }} />
+      <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

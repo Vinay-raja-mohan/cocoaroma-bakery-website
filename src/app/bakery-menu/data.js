@@ -1,5 +1,5 @@
-// All product data for the Cocoa Aroma Bakery Menu
-// Synchronized with official Cocoa Aroma bakery menu cards
+// All product data for the Cocoaroma Bakery Menu
+// Synchronized with official Cocoaroma bakery menu cards
 
 function makeCake(id, name, smallPrice, largePrice, description = '', img = '', pastryPrice = null) {
   const small = Number(smallPrice) || Math.round((Number(largePrice) || 1000) * 0.55);
@@ -98,12 +98,12 @@ const allCorporateCakes = [
   makeCake('loaded-rocher', 'Loaded Rocher', 650, 1200, 'Grand corporate cake loaded with hazelnut Ferrero Rocher truffles', '/images/cakes/loaded-rocher/1.png')
 ];
 
-// 6. Cheesecakes (Menu Page 1 - Small: 850, Large: 1400)
+// 6. Cheesecakes (Sold as 1 piece - 170)
 const allCheesecakes = [
-  makeCake('blueberry-cheesecake', 'Blueberry Cheesecake', 850, 1400, 'Velvety New York cheesecake topped with wild blueberry compote', '/images/Cheese Cakes/Blue Berry Cheese Cake/Blue Berry Cheese Cake.png', 170),
-  { ...makeCake('biscoff-cheesecake', 'Biscoff Cheesecake', 850, 1400, 'Creamy cheesecake infused with spiced Lotus Biscoff cookie butter', '/images/Cheese Cakes/Biscoff Cheese Cake/Biscoff Cheese Cake.png', 170), imageScale: 1.2 },
-  makeCake('red-velvet-cheesecake', 'Red Velvet Cheesecake', 850, 1400, 'New York cheesecake swirled over tender red velvet sponge', '/images/Cheese Cakes/Red Velvet Cheese Cake/Red Velvet Cheese Cake.png', 170),
-  { ...makeCake('nutella-cheesecake', 'Nutella Cheesecake', 850, 1400, 'Ultra-creamy cheesecake loaded with rich hazelnut Nutella', '/images/Cheese Cakes/Nutella Cheese Cake/Nutella Cheese Cake.png', 170), imageScale: 1.2 }
+  makeItem('blueberry-cheesecake', 'Blueberry Cheesecake', 170, 'Velvety New York cheesecake topped with wild blueberry compote', '/images/Cheese Cakes/Blue Berry Cheese Cake/Blue Berry Cheese Cake.png', { portion: '1 Piece' }),
+  { ...makeItem('biscoff-cheesecake', 'Biscoff Cheesecake', 170, 'Creamy cheesecake infused with spiced Lotus Biscoff cookie butter', '/images/Cheese Cakes/Biscoff Cheese Cake/Biscoff Cheese Cake.png', { portion: '1 Piece' }), imageScale: 1.2 },
+  makeItem('red-velvet-cheesecake', 'Red Velvet Cheesecake', 170, 'New York cheesecake swirled over tender red velvet sponge', '/images/Cheese Cakes/Red Velvet Cheese Cake/Red Velvet Cheese Cake.png', { portion: '1 Piece' }),
+  { ...makeItem('nutella-cheesecake', 'Nutella Cheesecake', 170, 'Ultra-creamy cheesecake loaded with rich hazelnut Nutella', '/images/Cheese Cakes/Nutella Cheese Cake/Nutella Cheese Cake.png', { portion: '1 Piece' }), imageScale: 1.2 }
 ];
 
 // 7. Gifting Cakes - 600 gm (Menu Page 1 - 800)
@@ -265,7 +265,7 @@ const allTeaTimeCakes = [
 
 export const CATEGORIES = [
   { id: 'regular-cakes', name: 'Regular Cakes', subtitle: 'Classic flavors baked to perfection for everyday celebrations.', image: '/images/icons/cake.png', items: allRegularCakes },
-  { id: 'cheesecakes', name: 'Cheesecakes', subtitle: 'Rich, creamy, and irresistibly smooth slices of joy.', image: '/images/icons/cheese cakes.png', items: allCheesecakes },
+  { id: 'cheesecakes', name: 'Cheesecakes', subtitle: 'Rich, creamy, and irresistibly smooth individual cheesecake cups.', image: '/images/icons/cheese cakes.png', items: allCheesecakes },
   { id: 'brownies', name: 'Brownies & Bites', subtitle: 'Fudgy, dense, and perfectly chocolatey treats.', image: '/images/icons/brownies.png', items: allBrownies },
   { id: 'desserts', name: 'Desserts', subtitle: 'Sweet, elegant cups of layered delight.', image: '/images/icons/Desserts.png', items: allDesserts },
   { id: 'pastries', name: 'Pastries', subtitle: 'Indulgent, single-serve slices of our premium cakes.', image: '/images/icons/cake.png', items: allPastries },

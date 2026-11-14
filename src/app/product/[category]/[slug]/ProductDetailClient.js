@@ -8,7 +8,7 @@ import './product-detail.css';
 export default function ProductDetailClient({ product, galleryImages = [], relatedProducts = [] }) {
   const isCake = Boolean(product.isCake);
 
-  // Small and Large prices directly from the official Cocoa Aroma Menu
+  // Small and Large prices directly from the official Cocoaroma Menu
   const smallRate = Number(product.smallPrice) || Number(product.price) || 600;
   const largeRate = Number(product.largePrice) || Math.round(smallRate * 1.8);
 
@@ -49,7 +49,7 @@ export default function ProductDetailClient({ product, galleryImages = [], relat
   // WhatsApp Order URL
   const itemDetailText = isCake 
     ? `"${product.name}" in ${selectedWeight} weight (Price: ₹${displayPrice.toLocaleString('en-IN')})`
-    : `"${product.name}"${product.weight ? ` (${product.weight})` : ''} (Price: ₹${displayPrice.toLocaleString('en-IN')})`;
+    : `"${product.name}"${product.portion ? ` (${product.portion})` : product.weight ? ` (${product.weight})` : ''} (Price: ₹${displayPrice.toLocaleString('en-IN')})`;
 
   const whatsappMessage = encodeURIComponent(
     `Hi Cocoaroma! I would like to order ${itemDetailText}. Please share availability and delivery options.`

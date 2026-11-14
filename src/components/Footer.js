@@ -166,7 +166,14 @@ export default function Footer() {
           border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
           font-size: 0.9rem;
           font-family: 'Inter', sans-serif;
-          color: rgba(255, 255, 255, 0.8);
+          color: rgba(255, 255, 255, 0.85);
+          text-decoration: none;
+          transition: color 0.2s, transform 0.2s;
+        }
+
+        .contact-item:hover {
+          color: #FFF8E7;
+          transform: translateX(4px);
         }
 
         .available-box {
@@ -287,13 +294,13 @@ export default function Footer() {
                 marginRight: '1px',
                 objectFit: 'contain'
               }}
-            />, the brand name of Sai Sree Foods Private Limited, has made a presence in the Hyderabad bakery segment since November 2025. Company with rich expertise in bakery product manufacturing and innovation. Starting with 3 stores in 2025, we are now a chain of 10+ offline stores across Hyderabad, marking our presence across all online food stores for online delivery of cakes and desserts. We are Happy and pleased that we have made a success of creating a product that meets our Customers Expectations in Quality, richness, and Satisfaction, with our sales rising exponentially since inception.
+            />, the brand name of Sai Sree Foods Private Limited, has made a presence in the Hyderabad bakery segment since November 2025. Company with rich expertise in bakery product manufacturing and innovation. Starting with 3 stores in 2025, we are now a chain of 5 offline stores across Hyderabad, marking our presence across all online food stores for online delivery of cakes and desserts. We are happy and pleased that we have made a success of creating a product that meets our customers' expectations in quality, richness, and satisfaction, with our sales rising exponentially since inception.
           </p>
           <div className="social-links">
-            <a href="#" className="social-btn"><InstagramIcon /></a>
-            <a href="#" className="social-btn"><FacebookIcon /></a>
-            <a href="#" className="social-btn"><TwitterIcon /></a>
-            <a href="#" className="social-btn"><YoutubeIcon /></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Follow Cocoaroma on Instagram"><InstagramIcon /></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Follow Cocoaroma on Facebook"><FacebookIcon /></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Follow Cocoaroma on Twitter"><TwitterIcon /></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="Subscribe to Cocoaroma on YouTube"><YoutubeIcon /></a>
           </div>
         </div>
 
@@ -302,9 +309,9 @@ export default function Footer() {
           <h4 className="footer-title">Quick Links</h4>
           <ul className="quick-links">
             <li><Link href="/bakery-menu">Our Menu</Link></li>
-            <li><Link href="/contact">Corporate Enquiry</Link></li>
-            <li><Link href="#">Privacy Policy</Link></li>
-            <li><Link href="#">Terms & Condition</Link></li>
+            <li><Link href="/stores">Our 5 Stores</Link></li>
+            <li><Link href="/about">About Us</Link></li>
+            <li><Link href="/contact">Contact & Enquiry</Link></li>
           </ul>
         </div>
 
@@ -312,15 +319,22 @@ export default function Footer() {
         <div className="footer-col-right">
           <h4 className="footer-title">Contact Us</h4>
           
-          <div className="contact-item">
+          <a href="https://wa.me/919491568833?text=Hi%20Cocoaroma!%20I%20have%20an%20enquiry." target="_blank" rel="noopener noreferrer" className="contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span>WhatsApp: +91 94915 68833</span>
+          </a>
+
+          <a href="tel:+919491568833" className="contact-item">
             <Phone size={16} color="#FFF8E7" />
-            <span>+91 94915 68833</span>
-          </div>
+            <span>Call: +91 94915 68833</span>
+          </a>
           
-          <div className="contact-item">
+          <a href="mailto:customersupport@cocoaroma.in" className="contact-item">
             <Mail size={16} color="#FFF8E7" />
             <span>customersupport@cocoaroma.in</span>
-          </div>
+          </a>
 
           <div style={{ marginTop: '2rem' }}>
             <h4 className="footer-title" style={{ marginBottom: '0.5rem' }}>Get it delivered on</h4>

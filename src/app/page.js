@@ -22,10 +22,9 @@ export default function Home() {
   return (
     <div className="home-page" style={{ backgroundColor: '#FFF8E7', minHeight: '100vh', paddingBottom: '4rem', overflowX: 'hidden', width: '100%', maxWidth: '100%' }}>
       <Hero />
-      <ArtisansProcessSection />
       <SignatureBakesSection />
-
       <OurSpecialsSection />
+      <ArtisansProcessSection />
 
       <OurStoresSection />
 

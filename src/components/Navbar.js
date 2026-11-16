@@ -35,6 +35,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [cakesAccordionOpen, setCakesAccordionOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -59,7 +60,26 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setCakesAccordionOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.classList.add('nav-drawer-open');
+    } else {
+      document.body.classList.remove('nav-drawer-open');
+    }
+    return () => document.body.classList.remove('nav-drawer-open');
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (searchOpen) {
+      document.body.classList.add('search-open');
+    } else {
+      document.body.classList.remove('search-open');
+    }
+    return () => document.body.classList.remove('search-open');
+  }, [searchOpen]);
 
   return (
     <>
@@ -367,16 +387,50 @@ export default function Navbar() {
         .mobile-menu {
           display: none;
           position: fixed;
-          top: 0;
+          top: 72px;
           left: 0;
           right: 0;
           bottom: 0;
-          height: 100vh;
-          background: #FFF;
-          padding: 80px 16px 24px;
-          animation: slideDown 0.3s ease;
+          height: calc(100vh - 72px);
+          background: #FFFFFF;
+          padding: 16px 18px calc(40px + env(safe-area-inset-bottom, 0px));
+          animation: slideDown 0.25s ease;
           overflow-y: auto;
-          z-index: -1;
+          -webkit-overflow-scrolling: touch;
+          z-index: 1001;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+          border-top: 1px solid #f0ece3;
+        }
+
+        .mobile-full-menu-cta {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: linear-gradient(135deg, #0D5E3D 0%, #157950 100%);
+          color: #FFF !important;
+          padding: 14px 16px;
+          border-radius: 12px;
+          text-decoration: none;
+          margin-bottom: 16px;
+          box-shadow: 0 4px 14px rgba(13, 94, 61, 0.25);
+        }
+
+        .mobile-accordion-toggle {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #fdfbf7;
+          border: 1px solid #f0e8d8;
+          padding: 12px 14px;
+          border-radius: 8px;
+          font-family: 'Inter', sans-serif;
+          font-size: 0.98rem;
+          font-weight: 600;
+          color: #0D5E3D;
+          cursor: pointer;
+          text-align: left;
+          margin-bottom: 6px;
         }
 
         .mobile-menu.open {
@@ -435,10 +489,15 @@ export default function Navbar() {
         }
 
         .mobile-link.nested-sub-link::before {
-          content: '•';
+          content: '';
           position: absolute;
-          left: 16px;
-          color: #0D5E3D;
+          left: 14px;
+          top: 50%;
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #C89B3C;
+          transform: translateY(-50%);
         }
 
         @keyframes slideDown {
@@ -620,22 +679,56 @@ export default function Navbar() {
             <span>Search cakes, snacks...</span>
           </button>
         </div>
+        {/* Highlighted Full Menu CTA */}
+        <Link
+          href="/bakery-menu"
+          className="mobile-full-menu-cta"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '1.25rem' }}>🎂</span>
+            <div>
+              <div style={{ fontWeight: 700, fontSize: '0.98rem', color: '#FFF' }}>Explore Full Bakery Menu</div>
+              <div style={{ fontSize: '0.78rem', color: '#E8F5E9', opacity: 0.9 }}>Visual catalog with photos & prices</div>
+            </div>
+          </div>
+          <span style={{ fontSize: '1.2rem', color: '#FFF' }}>&rarr;</span>
+        </Link>
+
         <Link href="/" className={`mobile-link ${pathname === '/' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Home</Link>
         
-        <div className="mobile-dropdown-title">Our Products</div>
+        <div className="mobile-dropdown-title">Categories</div>
         <div className="mobile-dropdown-items">
           {ourProductsMenu.map((item) => {
             if (item.subItems) {
               return (
-                <div key={item.name}>
-                  <div className="mobile-link sub-link" style={{ fontWeight: 600, color: '#0D5E3D' }}>
-                    {item.name}
-                  </div>
-                  {item.subItems.map((sub) => (
-                    <Link key={sub.name} href={`/product/${sub.id}`} className="mobile-link nested-sub-link" onClick={() => setMobileMenuOpen(false)}>
-                      {sub.name}
-                    </Link>
-                  ))}
+                <div key={item.name} style={{ marginBottom: '8px' }}>
+                  <button
+                    type="button"
+                    className="mobile-accordion-toggle"
+                    onClick={() => setCakesAccordionOpen(!cakesAccordionOpen)}
+                    aria-expanded={cakesAccordionOpen}
+                  >
+                    <span>🎂 {item.name} <span style={{ fontSize: '0.8rem', color: '#888', fontWeight: 400 }}>({item.subItems.length} varieties)</span></span>
+                    <span style={{
+                      transform: cakesAccordionOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.2s ease',
+                      fontSize: '0.85rem',
+                      color: '#C89B3C'
+                    }}>
+                      ▼
+                    </span>
+                  </button>
+
+                  {cakesAccordionOpen && (
+                    <div style={{ paddingLeft: '12px', borderLeft: '2px solid #E8E0D0', marginLeft: '12px', marginBottom: '8px' }}>
+                      {item.subItems.map((sub) => (
+                        <Link key={sub.name} href={`/product/${sub.id}`} className="mobile-link nested-sub-link" onClick={() => setMobileMenuOpen(false)}>
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
               );
             }
@@ -651,6 +744,51 @@ export default function Navbar() {
         <Link href="/stores" className={`mobile-link ${pathname === '/stores' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Stores</Link>
         <Link href="/contact" className={`mobile-link ${pathname === '/contact' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>Contact</Link>
         <Link href="/about" className={`mobile-link ${pathname === '/about' ? 'active' : ''}`} onClick={() => setMobileMenuOpen(false)}>About Us</Link>
+
+        {/* Quick Drawer Actions */}
+        <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #eee', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+          <a
+            href="tel:+919491568833"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              backgroundColor: '#f2f8f5',
+              color: '#0D5E3D',
+              padding: '11px 8px',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontSize: '0.86rem',
+              fontWeight: 600,
+              fontFamily: "'Inter', sans-serif"
+            }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Call Us
+          </a>
+          <Link
+            href="/stores"
+            onClick={() => setMobileMenuOpen(false)}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              backgroundColor: '#0D5E3D',
+              color: '#FFF',
+              padding: '11px 8px',
+              borderRadius: '8px',
+              textDecoration: 'none',
+              fontSize: '0.86rem',
+              fontWeight: 600,
+              fontFamily: "'Inter', sans-serif"
+            }}
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            5 Stores
+          </Link>
+        </div>
       </div>
     </header>
       <div className="navbar-spacer" aria-hidden="true" style={{ height: '73px' }} />

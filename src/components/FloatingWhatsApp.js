@@ -1,8 +1,16 @@
 'use client';
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function FloatingWhatsApp() {
+  const pathname = usePathname();
+
+  // Hide on Product Detail Pages since PDP already has dedicated prominent WhatsApp Order buttons
+  if (pathname?.startsWith('/product')) {
+    return null;
+  }
+
   return (
     <>
       <a
@@ -24,7 +32,7 @@ export default function FloatingWhatsApp() {
           position: fixed;
           bottom: 30px;
           left: 30px;
-          z-index: 9999;
+          z-index: 999;
           width: 56px;
           height: 56px;
           border-radius: 50%;
@@ -35,6 +43,11 @@ export default function FloatingWhatsApp() {
           box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
           transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
           text-decoration: none;
+        }
+
+        body.nav-drawer-open .floating-wa-btn,
+        body.search-open .floating-wa-btn {
+          display: none !important;
         }
 
         .floating-wa-btn:hover {
@@ -94,14 +107,15 @@ export default function FloatingWhatsApp() {
 
         @media (max-width: 768px) {
           .floating-wa-btn {
-            bottom: 20px;
-            left: 20px;
-            width: 48px;
-            height: 48px;
+            bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+            right: 18px;
+            left: auto;
+            width: 50px;
+            height: 50px;
           }
           .floating-wa-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
           }
           .floating-wa-tooltip {
             display: none;

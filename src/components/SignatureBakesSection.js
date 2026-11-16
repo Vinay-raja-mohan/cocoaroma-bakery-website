@@ -315,23 +315,72 @@ export default function SignatureBakesSection() {
         }
 
         @media (max-width: 768px) {
+          .signature-bakes-section {
+            padding: 0 16px 50px;
+          }
           .signature-container {
-            margin: 0 20px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0;
+          }
+          .nav-arrow {
+            display: none !important;
+          }
+          .category-nav-wrapper {
+            margin-bottom: 20px;
+          }
+          .category-scroll-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+            padding: 4px 2px 10px;
+            scrollbar-width: none;
+            width: 100%;
+          }
+          .category-scroll-container::-webkit-scrollbar {
+            display: none;
+          }
+          .category-btn {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            padding: 8px 16px;
+            font-size: 14px;
           }
           .signature-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
           }
         }
 
         @media (max-width: 480px) {
           .signature-grid {
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
           }
           .signature-left {
-            padding: 30px 20px 40px;
+            padding: 28px 16px 36px;
           }
           .signature-bakes-section {
             padding-bottom: 40px;
+          }
+          .signature-card {
+            border-radius: 10px;
+          }
+          .card-content {
+            padding: 10px 10px 12px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+          }
+          .card-title {
+            font-size: 0.88rem;
+            line-height: 1.25;
+            padding-right: 0;
+          }
+          .card-price {
+            font-size: 0.92rem;
           }
         }
       `}</style>
@@ -406,8 +455,16 @@ export default function SignatureBakesSection() {
                       )}
                     </div>
                     <div className="card-content">
-                      <h3 className="card-title">{product.name}</h3>
-                      <span className="card-price">₹{formattedPrice}</span>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: '2px' }}>
+                        <h3 className="card-title">{product.name}</h3>
+                        <span style={{ display: 'inline-flex', width: '12px', height: '12px', border: '1px solid #16a34a', alignItems: 'center', justifyContent: 'center', borderRadius: '2px', flexShrink: 0 }} title="100% Pure Veg">
+                          <span style={{ width: '6px', height: '6px', background: '#16a34a', borderRadius: '50%' }} />
+                        </span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                        <span className="card-price">₹{formattedPrice}</span>
+                        <span style={{ fontSize: '0.78rem', color: '#0D5E3D', fontWeight: 600 }}>View &rsaquo;</span>
+                      </div>
                     </div>
                   </Link>
                 );

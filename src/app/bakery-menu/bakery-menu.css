@@ -841,7 +841,8 @@
   .bm-page { padding: 0 12px 40px; }
 
   .bm-featured-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
   }
 
   .bm-circular-grid {
@@ -869,7 +870,7 @@
   .bm-page { padding: 0 16px 40px; }
   .bm-section-heading .bm-heading-text { font-size: clamp(1.3rem, 4vw, 1.8rem); }
   .bm-page-title { font-size: clamp(2rem, 6vw, 3rem); }
-  .bm-featured-grid { grid-template-columns: 1fr !important; }
+  .bm-featured-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
   .bm-compact-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .bm-circular-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .bm-featured-product { flex-direction: column !important; }
@@ -883,4 +884,58 @@
   .bm-circ-name, .bm-product-name { font-size: 0.8rem !important; }
   .bm-circ-price, .bm-product-price { font-size: 0.85rem !important; }
   .bm-circle-img { width: 80px !important; height: 80px !important; }
+}
+
+
+/* --- Sticky Category Jump Bar for Mobile --- */
+.bm-category-sticky-nav {
+  position: sticky;
+  top: 72px;
+  z-index: 500;
+  background: rgba(255, 248, 231, 0.98);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(200, 154, 58, 0.25);
+  padding: 10px 12px;
+  margin: 0 -12px 24px;
+}
+
+.bm-category-pill-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  padding: 2px 4px;
+}
+
+.bm-category-pill-track::-webkit-scrollbar {
+  display: none;
+}
+
+.bm-category-pill {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #FFFFFF;
+  color: #0D5E3D;
+  border: 1px solid #e0d7c3;
+  padding: 7px 14px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.bm-category-pill:hover,
+.bm-category-pill:active {
+  background: #0D5E3D;
+  color: #FFF;
+  border-color: #0D5E3D;
 }

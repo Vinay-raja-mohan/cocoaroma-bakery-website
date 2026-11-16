@@ -171,41 +171,90 @@ export default function ArtisansProcessSection() {
 
         @media (max-width: 768px) {
           .artisan-section {
-            padding: 40px 20px 60px;
+            padding: 36px 16px 50px;
           }
           .artisan-container {
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 24px;
           }
           .story-content {
             padding-right: 0;
             order: -1;
             text-align: center;
           }
+          .story-subtitle {
+            margin-bottom: 12px;
+            font-size: 0.82rem;
+            letter-spacing: 2px;
+          }
+          .story-title {
+            margin-bottom: 20px;
+          }
           .story-text {
-            margin: 0 auto 40px;
+            margin: 0 auto 24px;
+            font-size: 0.95rem;
+            line-height: 1.7;
           }
           .story-stats {
-            justify-content: center;
+            justify-content: space-around;
+            gap: 8px;
+            padding-top: 20px;
+            margin-top: 10px;
+          }
+          .stat-item h4 {
+            font-size: 1.6rem;
+            margin: 0 0 2px 0;
+          }
+          .stat-item p {
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
           }
           .branch-decor-1 {
-            right: 0;
-          }
-          .masonry-grid {
-            grid-template-rows: 220px 220px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .artisan-section {
-            padding: 24px 16px 40px;
+            display: none;
           }
           .masonry-grid {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 12px;
+            padding: 8px 4px 14px;
+            scrollbar-width: none;
+            width: 100%;
+            grid-template-rows: none;
+          }
+          .masonry-grid::-webkit-scrollbar {
+            display: none;
           }
           .masonry-item {
-            height: 300px;
+            flex: 0 0 82%;
+            height: 240px;
+            scroll-snap-align: center;
+            position: relative;
+            border-radius: 16px;
+          }
+          .item-tall,
+          .item-top-right,
+          .item-bottom-right {
+            grid-column: auto;
+            grid-row: auto;
+          }
+          .artisan-caption-pill {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            background: rgba(13, 94, 61, 0.88);
+            backdrop-filter: blur(4px);
+            color: #FFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            z-index: 2;
           }
         }
       `}</style>
@@ -224,6 +273,7 @@ export default function ArtisansProcessSection() {
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 50vw"
             />
+            <span className="artisan-caption-pill">🎂 Handcrafted Celebration Artistry</span>
           </div>
           
           <div className="masonry-item item-top-right">
@@ -234,6 +284,7 @@ export default function ArtisansProcessSection() {
               style={{ objectFit: 'cover' }}
               sizes="(max-width: 900px) 100vw, 25vw"
             />
+            <span className="artisan-caption-pill">🍩 Fresh Daily Patisserie</span>
           </div>
           
           <div className="masonry-item item-bottom-right">
@@ -244,6 +295,7 @@ export default function ArtisansProcessSection() {
               style={{ objectFit: 'cover', objectPosition: 'center' }}
               sizes="(max-width: 900px) 100vw, 25vw"
             />
+            <span className="artisan-caption-pill">✨ Master Baker Finishes</span>
           </div>
         </div>
 

@@ -202,6 +202,23 @@ export default function BakeryMenuPage() {
             <span className="bm-heading-ornament">❧</span>
           </div>
         </div>
+
+        {/* Sticky Mobile Category Filter Bar */}
+        <nav className="bm-category-sticky-nav" aria-label="Category Quick Navigation">
+          <div className="bm-category-pill-track">
+            <a href="#regular-cakes" className="bm-category-pill">🎂 Regular Cakes</a>
+            <a href="#cheesecakes" className="bm-category-pill">🫐 Cheesecakes</a>
+            <a href="#brownies" className="bm-category-pill">🍫 Brownies</a>
+            <a href="#cupcakes" className="bm-category-pill">🧁 Cupcakes</a>
+            <a href="#desserts" className="bm-category-pill">🍮 Desserts</a>
+            <a href="#unique-cakes" className="bm-category-pill">✨ Unique Cakes</a>
+            <a href="#kids-cakes" className="bm-category-pill">🦁 Kids Cakes</a>
+            <a href="#savouries" className="bm-category-pill">🥐 Savouries</a>
+            <a href="#cookies" className="bm-category-pill">🍪 Cookies</a>
+            <a href="#breads" className="bm-category-pill">🍞 Breads</a>
+            <a href="#tea-time-cakes" className="bm-category-pill">☕ Tea Time Cakes</a>
+          </div>
+        </nav>
         {/* ═══════════════════════════════════════════════
             ROW 1: Regular Cakes | Cheesecakes + Brownies
         ═══════════════════════════════════════════════ */}
@@ -210,7 +227,7 @@ export default function BakeryMenuPage() {
           <div className="bm-col bm-col-left" style={{ padding: '0 15px 0 0' }}>
             <div className="bm-organic-box" style={{ padding: '24px 20px', minHeight: 'auto' }}>
               <div style={{ marginBottom: '-12px' }}>
-                <SectionHeading featured={true}>Regular Cakes</SectionHeading>
+                <div id="regular-cakes" style={{ scrollMarginTop: "120px" }}><SectionHeading featured={true}>Regular Cakes</SectionHeading></div>
               </div>
               <div className="bm-featured-grid">
                 {regularCakes.map(p => (
@@ -229,7 +246,7 @@ export default function BakeryMenuPage() {
             {/* Cheesecakes */}
             <div>
               <div style={{ marginBottom: '-4px' }}>
-                <SectionHeading>Cheesecakes</SectionHeading>
+                <div id="cheesecakes" style={{ scrollMarginTop: "120px" }}><SectionHeading>Cheesecakes</SectionHeading></div>
               </div>
               <div className="bm-compact-grid">
                 {cheesecakes.map(p => (
@@ -246,7 +263,7 @@ export default function BakeryMenuPage() {
             {/* Brownies & Bites */}
             <div>
               <div style={{ marginBottom: '-4px' }}>
-                <SectionHeading>Brownies &amp; Bites</SectionHeading>
+                <div id="brownies" style={{ scrollMarginTop: "120px" }}><SectionHeading>Brownies &amp; Bites</SectionHeading></div>
               </div>
               <div className="bm-circular-grid">
                 {brownies.map(p => (
@@ -276,7 +293,7 @@ export default function BakeryMenuPage() {
             </div>
             <Divider />
             <div>
-              <SectionHeading>Cupcakes</SectionHeading>
+              <div id="cupcakes" style={{ scrollMarginTop: "120px" }}><SectionHeading>Cupcakes</SectionHeading></div>
               <div className="bm-circular-grid">
                 {cupcakes.map(p => (
                   <CircularProduct key={p.id} product={p} />
@@ -325,7 +342,7 @@ export default function BakeryMenuPage() {
           {/* RIGHT: Savouries + Cookies */}
           <div className="bm-col bm-col-right bm-stacked">
             <div>
-              <SectionHeading>Savouries</SectionHeading>
+              <div id="savouries" style={{ scrollMarginTop: "120px" }}><SectionHeading>Savouries</SectionHeading></div>
               <div className="bm-circular-grid">
                 {savouries.map(p => (
                   <CircularProduct key={p.id} product={p} />
@@ -365,7 +382,7 @@ export default function BakeryMenuPage() {
             <div style={{ marginTop: '15px' }} />
             
             <div>
-              <SectionHeading>Tea Time Cakes</SectionHeading>
+              <div id="tea-time-cakes" style={{ scrollMarginTop: "120px" }}><SectionHeading>Tea Time Cakes</SectionHeading></div>
               <div className="bm-circular-grid">
                 {teaTimeCakes.map(p => (
                   <CircularProduct key={p.id} product={p} />

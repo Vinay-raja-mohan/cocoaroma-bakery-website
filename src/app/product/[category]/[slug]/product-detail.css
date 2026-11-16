@@ -759,20 +759,100 @@
     font-size: 1.8rem;
   }
   .pdp-weights-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     gap: 8px;
+    padding: 4px 2px 8px;
+    width: 100%;
+  }
+  .pdp-weights-row::-webkit-scrollbar {
+    display: none;
   }
   .pdp-weight-item {
-    min-width: 60px;
+    flex: 0 0 auto;
+    min-width: auto;
   }
   .pdp-weight-btn {
-    padding: 7px 12px;
-    font-size: 0.88rem;
-    min-width: 60px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    min-width: auto;
   }
   .pdp-sub-actions-row {
     grid-template-columns: 1fr;
   }
   .pdp-related-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* --- Mobile Sticky Bottom Bar --- */
+.pdp-mobile-sticky-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .pdp-page {
+    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  }
+  .pdp-mobile-sticky-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #FFFFFF;
+    border-top: 1px solid #EFEAE1;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    z-index: 998;
+  }
+
+  .pdp-sticky-price-wrap {
+    display: flex;
+    flex-direction: column;
+    min-width: 90px;
+  }
+
+  .pdp-sticky-weight-label {
+    font-size: 0.75rem;
+    color: #6B7280;
+    font-weight: 500;
+  }
+
+  .pdp-sticky-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0E3B2E;
+    line-height: 1.1;
+  }
+
+  .pdp-sticky-whatsapp-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #25D366;
+    color: #FFFFFF;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 12px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    transition: transform 0.2s ease;
+  }
+
+  .pdp-sticky-whatsapp-btn:hover {
+    background: #20BA5A;
   }
 }

@@ -26,7 +26,7 @@ export default function FloatingMenuButton() {
           position: fixed;
           bottom: 30px;
           right: 30px;
-          z-index: 9999;
+          z-index: 999;
           display: flex;
           align-items: center;
           gap: 10px;
@@ -41,6 +41,11 @@ export default function FloatingMenuButton() {
           font-weight: 600;
           font-size: 1.05rem;
           overflow: hidden;
+        }
+
+        body.nav-drawer-open .floating-menu-btn,
+        body.search-open .floating-menu-btn {
+          display: none !important;
         }
 
         .floating-menu-btn::before {
@@ -76,17 +81,10 @@ export default function FloatingMenuButton() {
           justify-content: center;
         }
         
-        /* Mobile adjustments */
+        /* Mobile adjustments: Hide floating pill on mobile screens to prevent dual-button collision with WhatsApp and allow clear thumb zone */
         @media (max-width: 768px) {
           .floating-menu-btn {
-            bottom: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            font-size: 0.95rem;
-          }
-          .floating-menu-icon svg {
-            width: 20px;
-            height: 20px;
+            display: none !important;
           }
         }
       `}</style>

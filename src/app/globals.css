@@ -28,7 +28,7 @@ html,
 body {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -290,3 +290,16 @@ a {
 .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
 .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
 .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+
+/* Mobile Safe Area & Modal Locks */
+body.nav-drawer-open {
+  overflow: hidden !important;
+}
+
+body.nav-drawer-open .floating-wa-btn,
+body.nav-drawer-open .floating-menu-btn,
+body.search-open .floating-wa-btn,
+body.search-open .floating-menu-btn {
+  display: none !important;
+}
+

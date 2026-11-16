@@ -311,6 +311,23 @@ export default function ContactSection() {
         .reset-form-link:hover {
           color: #083D28;
         }
+
+        @media (max-width: 768px) {
+          .contact-section {
+            padding: 3rem 16px 5rem !important;
+          }
+          .contact-container {
+            gap: 2rem;
+          }
+          .contact-heading {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+          }
+          .enquiry-form-card {
+            padding: 20px 16px;
+            border-radius: 12px;
+          }
+        }
       `}</style>
 
       <div className="contact-container">

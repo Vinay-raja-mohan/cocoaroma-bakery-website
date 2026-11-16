@@ -70,7 +70,7 @@ export default function StoresPage() {
               key={store.id} 
               style={{ 
                 backgroundColor: '#FFF', 
-                padding: '40px', 
+                padding: 'clamp(20px, 4vw, 40px)', 
                 borderRadius: '16px', 
                 boxShadow: '0 10px 40px rgba(8, 61, 40, 0.05)', 
                 border: '1px solid rgba(200,155,60,0.1)',
@@ -106,12 +106,35 @@ export default function StoresPage() {
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C89B3C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#4A4A4A', margin: 0 }}>
+                <a href={`tel:${store.phone.replace(/[^0-9+]/g, '')}`} style={{ fontFamily: "'Inter', sans-serif", fontSize: '1rem', color: '#083D28', fontWeight: '600', margin: 0, textDecoration: 'none' }}>
                   {store.phone}
-                </p>
+                </a>
               </div>
               
-              <div style={{ marginTop: 'auto' }}>
+              <div style={{ marginTop: 'auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                <a 
+                  href={`tel:${store.phone.replace(/[^0-9+]/g, '')}`}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#f2f8f5',
+                    color: '#083D28',
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '0.9rem',
+                    fontWeight: '600',
+                    padding: '12px 8px',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    gap: '6px',
+                    border: '1px solid #c9e2d5',
+                    transition: 'all 0.2s ease',
+                    textAlign: 'center'
+                  }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                  Call Store
+                </a>
                 <a 
                   href={store.mapLink}
                   target="_blank"
@@ -123,28 +146,18 @@ export default function StoresPage() {
                     backgroundColor: '#083D28',
                     color: '#FFF',
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.95rem',
+                    fontSize: '0.9rem',
                     fontWeight: '600',
-                    padding: '12px 24px',
+                    padding: '12px 8px',
                     borderRadius: '8px',
                     textDecoration: 'none',
-                    transition: 'all 0.3s ease',
-                    width: '100%',
-                    gap: '8px'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.backgroundColor = '#0D5E3D';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(13, 94, 61, 0.2)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.backgroundColor = '#083D28';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = 'none';
+                    gap: '6px',
+                    transition: 'all 0.2s ease',
+                    textAlign: 'center'
                   }}
                 >
-                  Get Directions
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  Directions
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                   </svg>

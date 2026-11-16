@@ -40,8 +40,8 @@ function ImgWithFallback({ src, fallback, alt, className, style }) {
       setFailed(true);
     }
   }, [failed, fallback, imgSrc]);
-
   if (failed && imgSrc === fallback) {
+    // render a placeholder gradient
     return <div className={className} style={{ background: 'linear-gradient(135deg,#f0e8d5,#e0d4b8)', width: '100%', height: '100%', ...style }} />;
   }
   return <img src={imgSrc} alt={alt} onError={handleError} loading="lazy" className={className} style={style} />;
@@ -57,6 +57,14 @@ function Badge({ type }) {
   return <span className={cls}>{type === 'VEGAN' ? '🌿 ' : ''}{type}</span>;
 }
 
+function AddToBox({ product, onAdd }) {
+  return (
+    <button className="bm-atb-btn" onClick={() => onAdd(product)} aria-label={`Add ${product.name} to box`}>
+      Add to Box
+    </button>
+  );
+}
+
 function SectionHeading({ children, center, featured }) {
   return (
     <div className={`bm-section-heading${center ? ' bm-section-heading-center' : ''}${featured ? ' bm-section-heading-featured' : ''}`}>
@@ -69,11 +77,11 @@ function SectionHeading({ children, center, featured }) {
   );
 }
 
-function ViewMoreButton({ href, label = 'Explore Full Range' }) {
+function ViewMoreButton({ href }) {
   return (
-    <div className="bm-view-more-wrap">
+    <div style={{ textAlign: 'center', marginTop: '8px', marginBottom: '4px' }}>
       <Link href={href} className="bm-view-more-btn">
-        {label} &rarr;
+        View More &rarr;
       </Link>
     </div>
   );
@@ -83,58 +91,107 @@ function Divider() {
   return <hr className="bm-divider-h" />;
 }
 
-// ─── Unified Luxury Menu Card ──────────────────────────────
-function MenuCard({ product }) {
+// ─── Featured Product (large) ──────────────────────────────
+function FeaturedProduct({ product, onAdd }) {
   return (
-    <Link href={getCategoryPath(product.id)} className="bm-card-link">
-      <article className="bm-card">
-        <div className="bm-card-img-wrap">
-          <ImgWithFallback 
-            src={product.image} 
-            fallback={product.imageFallback} 
-            alt={product.name}
-            className="bm-card-img"
-            style={{ transform: product.imageScale ? `scale(${product.imageScale})` : 'none' }}
-          />
+    <Link href={getCategoryPath(product.id)} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+      <article className="bm-featured-product">
+        <div className="bm-featured-img-wrap">
+          <ImgWithFallback src={product.image} fallback={product.imageFallback} alt={product.name} />
           {product.badge && <Badge type={product.badge} />}
           {product.extraBadge && <Badge type={product.extraBadge} />}
-          <div className="bm-veg-badge" title="100% Pure Vegetarian / Eggless">
-            <span className="bm-veg-dot" />
-          </div>
         </div>
-        <div className="bm-card-body">
-          <h3 className="bm-card-name">{product.name}</h3>
-          {product.description && <p className="bm-card-desc">{product.description}</p>}
-          <div className="bm-card-bottom">
-            <span className="bm-card-price">
-              ₹{Number(product.price).toLocaleString('en-IN')}
-              {product.isCake && <span className="bm-card-unit"> (0.5 Kg)</span>}
-              {product.portion && <span className="bm-card-unit"> ({product.portion})</span>}
-              {product.weight && <span className="bm-card-unit"> ({product.weight})</span>}
-            </span>
-            <span className="bm-card-view-btn">View &rarr;</span>
-          </div>
+        <div className="bm-featured-info">
+          <div className="bm-product-name">{product.name}</div>
+          {product.description && <div className="bm-product-desc">{product.description}</div>}
+          <div className="bm-product-price">₹{product.price}</div>
         </div>
       </article>
     </Link>
   );
 }
 
-// Backwards-compatible aliases
-function FeaturedProduct({ product }) {
-  return <MenuCard product={product} />;
+// ─── Compact Product (cheesecakes) ────────────────────────
+function CompactProduct({ product, onAdd }) {
+  return (
+    <Link href={getCategoryPath(product.id)} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+      <article className="bm-compact-product" style={{ textAlign: 'center' }}>
+        <div className="bm-circle-img" style={{ margin: '0 auto', overflow: 'hidden' }}>
+          <ImgWithFallback 
+            src={product.image} 
+            fallback={product.imageFallback} 
+            alt={product.name} 
+            style={{ transform: product.imageScale ? `scale(${product.imageScale})` : 'none' }} 
+          />
+        </div>
+        <div className="bm-product-name" style={{ fontSize: '0.92rem', marginTop: '4px' }}>{product.name}</div>
+        {product.description && <div className="bm-product-desc">{product.description}</div>}
+        <div className="bm-product-price" style={{ fontSize: '1rem' }}>₹{product.price}</div>
+      </article>
+    </Link>
+  );
 }
 
-function CompactProduct({ product }) {
-  return <MenuCard product={product} />;
-}
-
+// ─── Circular Product ─────────────────────────────────────
 function CircularProduct({ product }) {
-  return <MenuCard product={product} />;
+  return (
+    <Link href={getCategoryPath(product.id)} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+      <article className="bm-circular-product">
+        <div className="bm-circle-img">
+          <ImgWithFallback src={product.image} fallback={product.imageFallback} alt={product.name} />
+        </div>
+        <div className="bm-circ-name">{product.name}</div>
+        {product.description && <div className="bm-circ-desc">{product.description}</div>}
+        <div className="bm-circ-price">₹{product.price}</div>
+      </article>
+    </Link>
+  );
 }
+
+
+
+// ─── Header ───────────────────────────────────────────────
+function Header() {
+  return (
+    <header className="bm-header">
+      <div className="bm-header-line">
+        <div className="bm-header-rule" />
+        <span className="bm-header-icon">✦</span>
+        <div className="bm-header-rule" />
+      </div>
+      <div className="bm-header-flourish-row">
+        <svg width="60" height="18" viewBox="0 0 60 18" fill="none" aria-hidden="true">
+          <path d="M0 9 Q15 0 30 9 Q45 18 60 9" stroke="#C89A3A" strokeWidth="1" fill="none"/>
+        </svg>
+        <span style={{ color: '#C89A3A', fontSize: '1.3rem' }}>🎂</span>
+        <svg width="60" height="18" viewBox="0 0 60 18" fill="none" aria-hidden="true">
+          <path d="M0 9 Q15 18 30 9 Q45 0 60 9" stroke="#C89A3A" strokeWidth="1" fill="none"/>
+        </svg>
+      </div>
+      <h1 className="bm-logo-brand">Cocoaroma</h1>
+      <div className="bm-logo-sub">Bakery</div>
+      <div className="bm-logo-tagline">Pure Veg. Pure Delight.</div>
+      <div style={{ marginTop: 12 }}>
+        <div className="bm-header-rule" style={{ maxWidth: '200px', margin: '0 auto' }} />
+      </div>
+    </header>
+  );
+}
+
+
 
 // ─── MAIN PAGE ────────────────────────────────────────────
 export default function BakeryMenuPage() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = useCallback((product) => {
+    setCartItems(prev => [...prev, product]);
+  }, []);
+
+  const removeFromCart = useCallback((index) => {
+    setCartItems(prev => prev.filter((_, i) => i !== index));
+  }, []);
+
   return (
     <div className="bm-root" id="top">
       <div className="bm-page">
@@ -145,7 +202,6 @@ export default function BakeryMenuPage() {
             <span className="bm-heading-ornament">❧</span>
           </div>
         </div>
-
         {/* ═══════════════════════════════════════════════
             ROW 1: Regular Cakes | Cheesecakes + Brownies
         ═══════════════════════════════════════════════ */}
@@ -154,14 +210,14 @@ export default function BakeryMenuPage() {
           <div className="bm-col bm-col-left" style={{ padding: '0 15px 0 0' }}>
             <div className="bm-organic-box" style={{ padding: '24px 20px', minHeight: 'auto' }}>
               <div style={{ marginBottom: '-12px' }}>
-                <div id="regular-cakes" style={{ scrollMarginTop: "120px" }}><SectionHeading featured={true}>Regular Cakes</SectionHeading></div>
+                <SectionHeading featured={true}>Regular Cakes</SectionHeading>
               </div>
               <div className="bm-featured-grid">
                 {regularCakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <FeaturedProduct key={p.id} product={p} onAdd={addToCart} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/regular-cakes" label="Explore Regular Cakes" />
+              <ViewMoreButton href="/product/regular-cakes" />
             </div>
           </div>
 
@@ -173,14 +229,14 @@ export default function BakeryMenuPage() {
             {/* Cheesecakes */}
             <div>
               <div style={{ marginBottom: '-4px' }}>
-                <div id="cheesecakes" style={{ scrollMarginTop: "120px" }}><SectionHeading>Cheesecakes</SectionHeading></div>
+                <SectionHeading>Cheesecakes</SectionHeading>
               </div>
-              <div className="bm-featured-grid">
+              <div className="bm-compact-grid">
                 {cheesecakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CompactProduct key={p.id} product={p} onAdd={addToCart} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/cheesecakes" label="Explore Cheesecakes" />
+              <ViewMoreButton href="/product/cheesecakes" />
             </div>
 
             <div style={{ margin: '4px 0' }}>
@@ -190,104 +246,102 @@ export default function BakeryMenuPage() {
             {/* Brownies & Bites */}
             <div>
               <div style={{ marginBottom: '-4px' }}>
-                <div id="brownies" style={{ scrollMarginTop: "120px" }}><SectionHeading>Brownies &amp; Bites</SectionHeading></div>
+                <SectionHeading>Brownies &amp; Bites</SectionHeading>
               </div>
-              <div className="bm-featured-grid">
+              <div className="bm-circular-grid">
                 {brownies.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/brownies" label="Explore Brownies" />
+              <ViewMoreButton href="/product/brownies" />
             </div>
           </div>
         </div>
 
+
         {/* ═══════════════════════════════════════════════
             ROW 2: Desserts + Cupcakes | Unique Cakes
         ═══════════════════════════════════════════════ */}
-        <div className="bm-row bm-animate" style={{ marginBottom: '30px' }}>
+        <div className="bm-row bm-animate">
           {/* LEFT: Desserts + Cupcakes */}
-          <div className="bm-col bm-col-left bm-stacked" style={{ gap: '24px', padding: '0 15px 0 0' }}>
+          <div className="bm-col bm-col-left bm-stacked">
             <div>
               <SectionHeading>Desserts</SectionHeading>
-              <div className="bm-featured-grid">
+              <div className="bm-circular-grid">
                 {desserts.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/desserts" label="Explore Desserts" />
+              <ViewMoreButton href="/product/desserts" />
             </div>
-            <div style={{ margin: '4px 0' }}>
-              <Divider />
-            </div>
+            <Divider />
             <div>
-              <div id="cupcakes" style={{ scrollMarginTop: "120px" }}><SectionHeading>Cupcakes</SectionHeading></div>
-              <div className="bm-featured-grid">
+              <SectionHeading>Cupcakes</SectionHeading>
+              <div className="bm-circular-grid">
                 {cupcakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/cupcakes" label="Explore Cupcakes" />
+              <ViewMoreButton href="/product/cupcakes" />
             </div>
           </div>
 
           <div className="bm-divider-v" />
 
           {/* RIGHT: Unique Cakes */}
-          <div className="bm-col bm-col-right" style={{ padding: '0 0 0 15px' }}>
-            <div className="bm-organic-box bm-organic-box-alt" style={{ padding: '24px 20px', minHeight: 'auto' }}>
+          <div className="bm-col bm-col-right">
+            <div className="bm-organic-box bm-organic-box-alt">
               <SectionHeading featured={true}>Unique Cakes</SectionHeading>
               <div className="bm-featured-grid">
                 {uniqueCakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <FeaturedProduct key={p.id} product={p} onAdd={addToCart} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/unique-cakes" label="Explore Unique Cakes" />
+              <ViewMoreButton href="/product/unique-cakes" />
             </div>
           </div>
         </div>
 
+
         {/* ═══════════════════════════════════════════════
             ROW 3: Kids Cakes | Savouries + Cookies
         ═══════════════════════════════════════════════ */}
-        <div className="bm-row bm-animate" style={{ marginBottom: '30px' }}>
+        <div className="bm-row bm-animate">
           {/* LEFT: Kids Cakes */}
-          <div className="bm-col bm-col-left" style={{ padding: '0 15px 0 0' }}>
-            <div className="bm-organic-box" style={{ padding: '24px 20px', minHeight: 'auto' }}>
+          <div className="bm-col bm-col-left">
+            <div className="bm-organic-box">
               <SectionHeading featured={true}>KIDS Cakes</SectionHeading>
               <div className="bm-featured-grid">
                 {kidsCakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <FeaturedProduct key={p.id} product={p} onAdd={addToCart} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/kids-cakes" label="Explore Kids Cakes" />
+              <ViewMoreButton href="/product/kids-cakes" />
             </div>
           </div>
 
           <div className="bm-divider-v" />
 
           {/* RIGHT: Savouries + Cookies */}
-          <div className="bm-col bm-col-right bm-stacked" style={{ gap: '24px', padding: '0 0 0 15px' }}>
+          <div className="bm-col bm-col-right bm-stacked">
             <div>
-              <div id="savouries" style={{ scrollMarginTop: "120px" }}><SectionHeading>Savouries</SectionHeading></div>
-              <div className="bm-featured-grid">
+              <SectionHeading>Savouries</SectionHeading>
+              <div className="bm-circular-grid">
                 {savouries.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/savouries" label="Explore Savouries" />
+              <ViewMoreButton href="/product/savouries" />
             </div>
-            <div style={{ margin: '4px 0' }}>
-              <Divider />
-            </div>
+            <Divider />
             <div>
               <SectionHeading>Cookies</SectionHeading>
-              <div className="bm-featured-grid">
+              <div className="bm-circular-grid">
                 {Cookies.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/Cookies" label="Explore Cookies" />
+              <ViewMoreButton href="/product/Cookies" />
             </div>
           </div>
         </div>
@@ -295,46 +349,44 @@ export default function BakeryMenuPage() {
         {/* ═══════════════════════════════════════════════
             ROW 4: Breads, Tid Bits, Tea Time | Love Cake
         ═══════════════════════════════════════════════ */}
-        <div className="bm-row bm-animate" style={{ marginBottom: '30px' }}>
+        <div className="bm-row bm-animate">
           {/* LEFT: Breads & Tea Time Cakes */}
-          <div className="bm-col bm-col-left bm-stacked" style={{ gap: '24px', padding: '0 15px 0 0' }}>
+          <div className="bm-col bm-col-left bm-stacked">
             <div>
               <SectionHeading>Breads &amp; Tid Bits</SectionHeading>
-              <div className="bm-featured-grid">
+              <div className="bm-circular-grid">
                 {breads.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/breads" label="Explore Breads" />
+              <ViewMoreButton href="/product/breads" />
             </div>
             
-            <div style={{ margin: '4px 0' }}>
-              <Divider />
-            </div>
+            <div style={{ marginTop: '15px' }} />
             
             <div>
-              <div id="tea-time-cakes" style={{ scrollMarginTop: "120px" }}><SectionHeading>Tea Time Cakes</SectionHeading></div>
-              <div className="bm-featured-grid">
+              <SectionHeading>Tea Time Cakes</SectionHeading>
+              <div className="bm-circular-grid">
                 {teaTimeCakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <CircularProduct key={p.id} product={p} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/tea-time-cakes" label="Explore Tea Time Cakes" />
+              <ViewMoreButton href="/product/tea-time-cakes" />
             </div>
           </div>
 
           <div className="bm-divider-v" />
 
           {/* RIGHT: Love Cake */}
-          <div className="bm-col bm-col-right" style={{ padding: '0 0 0 15px' }}>
-            <div className="bm-organic-box" style={{ padding: '24px 20px', minHeight: 'auto' }}>
+          <div className="bm-col bm-col-right">
+            <div className="bm-organic-box">
               <SectionHeading featured={true}>Love Cake</SectionHeading>
               <div className="bm-featured-grid">
                 {loveCakes.map(p => (
-                  <MenuCard key={p.id} product={p} />
+                  <FeaturedProduct key={p.id} product={p} onAdd={addToCart} />
                 ))}
               </div>
-              <ViewMoreButton href="/product/love-cakes" label="Explore Love Cakes" />
+              <ViewMoreButton href="/product/love-cakes" />
             </div>
           </div>
         </div>
@@ -343,18 +395,20 @@ export default function BakeryMenuPage() {
             ROW 5: Corporate Cakes (Full Width)
         ═══════════════════════════════════════════════ */}
         <div className="bm-row-full bm-animate" style={{ marginBottom: '25px' }}>
-          <div className="bm-organic-box" style={{ borderRadius: '40px 8px 40px 8px', padding: '24px 24px', minHeight: 'auto', maxWidth: '850px', margin: '0 auto' }}>
+          <div className="bm-organic-box" style={{ borderRadius: '40px 8px 40px 8px', padding: '20px 30px', minHeight: 'auto' }}>
             <SectionHeading center={true} featured={true}>Corporate Cakes</SectionHeading>
-            <div className="bm-featured-grid">
+            <div className="bm-featured-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', maxWidth: '700px', margin: '0 auto' }}>
               {corporateCakes.map(p => (
-                <MenuCard key={p.id} product={p} />
+                <FeaturedProduct key={p.id} product={p} onAdd={addToCart} />
               ))}
             </div>
-            <ViewMoreButton href="/product/corporate-cakes" label="Explore Corporate Cakes" />
+            <ViewMoreButton href="/product/corporate-cakes" />
           </div>
         </div>
 
       </div>{/* /bm-page */}
+
+
     </div>
   );
 }

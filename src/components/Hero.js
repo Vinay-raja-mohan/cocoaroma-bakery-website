@@ -98,13 +98,14 @@ export default function Hero() {
         @media (max-width: 480px) {
           .slider-arrow.left {
             left: 10px !important;
-            width: 36px !important;
-            height: 36px !important;
+            /* FIX #4: Minimum 44x44px touch target on mobile */
+            width: 44px !important;
+            height: 44px !important;
           }
           .slider-arrow.right {
             right: 10px !important;
-            width: 36px !important;
-            height: 36px !important;
+            width: 44px !important;
+            height: 44px !important;
           }
         }
       `}</style>
@@ -155,22 +156,34 @@ export default function Hero() {
       </button>
 
       {/* Pagination Dots */}
-      <div style={{ position: 'absolute', bottom: '25px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '10px', zIndex: 10 }}>
+      <div style={{ position: 'absolute', bottom: '25px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '0px', zIndex: 10 }}>
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
             style={{
-              width: currentSlide === index ? '30px' : '10px',
-              height: '10px',
-              borderRadius: '5px',
-              backgroundColor: currentSlide === index ? '#0D5E3D' : 'rgba(0,0,0,0.2)', // Updated to Green Theme
+              /* FIX #4: 44x44px wrapper around visual dot for WCAG touch target compliance */
+              width: '44px',
+              height: '44px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              transition: 'all 0.3s'
+              padding: 0,
             }}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <span style={{
+              display: 'block',
+              width: currentSlide === index ? '26px' : '10px',
+              height: '10px',
+              borderRadius: '5px',
+              backgroundColor: currentSlide === index ? '#0D5E3D' : 'rgba(0,0,0,0.2)',
+              transition: 'all 0.3s'
+            }} />
+          </button>
         ))}
       </div>
     </section>

@@ -173,7 +173,7 @@
 }
 
 .pdp-veg-text {
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: #16A34A;
   letter-spacing: 0.6px;
@@ -331,6 +331,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-bottom: 12px;
 }
 
@@ -349,6 +351,9 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  /* FIX #2: Don't clip serving info on small screens */
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .pdp-serving-link:hover {
@@ -765,8 +770,10 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 8px;
-    padding: 4px 2px 8px;
+    padding: 4px 20px 8px 2px;
     width: 100%;
+    /* FIX #2: Right gutter so last chip is clearly scrollable */
+    margin-right: -14px;
   }
   .pdp-weights-row::-webkit-scrollbar {
     display: none;
@@ -780,6 +787,11 @@
     font-size: 0.9rem;
     white-space: nowrap;
     min-width: auto;
+    /* FIX #2: Meet 44px touch target height */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .pdp-sub-actions-row {
     grid-template-columns: 1fr;
@@ -854,5 +866,40 @@
 
   .pdp-sticky-whatsapp-btn:hover {
     background: #20BA5A;
+  }
+}
+
+/* FIX #3: Sticky bar cramping on very small screens (≤ 375px) */
+@media (max-width: 375px) {
+  .pdp-mobile-sticky-bar {
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+    gap: 8px;
+  }
+  .pdp-sticky-price-wrap {
+    min-width: 70px;
+  }
+  .pdp-sticky-price {
+    font-size: 1.15rem !important;
+  }
+  .pdp-sticky-weight-label {
+    font-size: 0.68rem;
+  }
+  .pdp-sticky-whatsapp-btn {
+    font-size: 0.82rem !important;
+    padding: 10px 10px !important;
+    gap: 5px !important;
+    white-space: nowrap;
+  }
+  .pdp-sticky-whatsapp-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+    flex-shrink: 0;
+  }
+}
+
+/* FIX #8: Explicit safe-area-inset-bottom for iOS and gesture-nav Android */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pdp-mobile-sticky-bar {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 }

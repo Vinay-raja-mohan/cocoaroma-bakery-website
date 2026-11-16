@@ -303,3 +303,13 @@ body.search-open .floating-menu-btn {
   display: none !important;
 }
 
+/* FIX #8: Safe area insets for iOS & gesture-nav Android */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .pdp-mobile-sticky-bar {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+  }
+  .floating-wa-btn {
+    bottom: calc(18px + env(safe-area-inset-bottom)) !important;
+  }
+}
+

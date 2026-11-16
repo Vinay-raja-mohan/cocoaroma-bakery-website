@@ -134,6 +134,10 @@ export default function ContactPage() {
           text-decoration: none;
           color: inherit;
           transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+          /* FIX #1: Prevent card from overflowing viewport */
+          min-width: 0;
+          max-width: 100%;
+          box-sizing: border-box;
         }
 
         .care-card:hover {
@@ -176,6 +180,10 @@ export default function ContactPage() {
           font-weight: 700;
           color: #083D28;
           line-height: 1.3;
+          /* FIX #1: Allow long email/phone strings to wrap */
+          overflow-wrap: anywhere;
+          word-break: break-word;
+          min-width: 0;
         }
 
         .care-subval {
@@ -373,6 +381,26 @@ export default function ContactPage() {
           }
           .central-care-grid {
             grid-template-columns: 1fr;
+          }
+        }
+
+        /* FIX #1: Small mobile — care cards overflow fix */
+        @media (max-width: 480px) {
+          .central-care-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+          }
+          .care-card {
+            padding: 16px 14px;
+            gap: 12px;
+          }
+          .care-icon-box {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+          }
+          .care-val {
+            font-size: 0.95rem;
           }
         }
       `}</style>

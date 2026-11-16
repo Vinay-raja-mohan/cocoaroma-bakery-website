@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CATEGORIES } from '../../bakery-menu/data';
@@ -11,7 +11,7 @@ export default function CategoryLayout({ categoryId }) {
     return (
       <div style={{ textAlign: 'center', padding: '10rem 20px' }}>
         <h1>Category Not Found</h1>
-        <Link href="/product">Back to Products</Link>
+        <Link href="/bakery-menu">Back to Menu</Link>
       </div>
     );
   }
@@ -19,7 +19,7 @@ export default function CategoryLayout({ categoryId }) {
   return (
     <div className="pl-root-sidebar">
       
-      {/* LEFT SIDEBAR - CATEGORIES */}
+      {/* LEFT SIDEBAR - CATEGORIES (Desktop Only) */}
       <aside className="pl-sidebar">
         <h2 className="pl-sidebar-title">Categories</h2>
         <div className="pl-sidebar-menu">
@@ -37,7 +37,7 @@ export default function CategoryLayout({ categoryId }) {
                   height={42}
                   style={{ objectFit: 'contain' }}
                   className="pl-sidebar-img" 
-                  onError={(e) => { e.currentTarget.srcset = ''; e.currentTarget.src = '/images/cakes/image-coming-soon.svg' }} 
+                  onError={(e) => { e.currentTarget.srcset = ''; e.currentTarget.src = '/images/cakes/image-coming-soon.svg'; }} 
                 />
               </div>
               <span className="pl-sidebar-name">{cat.name}</span>
@@ -46,7 +46,7 @@ export default function CategoryLayout({ categoryId }) {
         </div>
       </aside>
 
-      {/* RIGHT MAIN CONTENT - GRID ONLY */}
+      {/* RIGHT MAIN CONTENT - GRID */}
       <main className="pl-main-content">
         <h1 className="pl-main-title">{currentCategory.name}</h1>
         {currentCategory.subtitle && (
@@ -60,36 +60,42 @@ export default function CategoryLayout({ categoryId }) {
                   src={product.image || product.imageFallback || '/images/cakes/image-coming-soon.svg'} 
                   alt={product.name}
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                   style={{ objectFit: 'cover', transform: product.imageScale ? `scale(${product.imageScale})` : 'none' }}
                   className="pl-card-img" 
                   priority={index < 6}
-                  onError={(e) => { e.currentTarget.srcset = ''; e.currentTarget.src = product.imageFallback || '/images/cakes/image-coming-soon.svg' }} 
+                  onError={(e) => { e.currentTarget.srcset = ''; e.currentTarget.src = product.imageFallback || '/images/cakes/image-coming-soon.svg'; }} 
                 />
+                <div className="pl-veg-badge" title="100% Pure Vegetarian / Eggless">
+                  <span className="pl-veg-dot" />
+                </div>
               </div>
-              <h3 className="pl-card-title">{product.name}</h3>
-              <div className="pl-card-bottom">
-                <span className="pl-card-price">
-                  ₹{Number(product.price).toLocaleString('en-IN')}
-                  {product.isCake && (
-                    <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#6B7280', marginLeft: '6px' }}>
-                      (0.5 Kg)
-                    </span>
-                  )}
-                  {product.portion && (
-                    <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#6B7280', marginLeft: '6px' }}>
-                      ({product.portion})
-                    </span>
-                  )}
-                  {product.weight && (
-                    <span style={{ fontSize: '0.8rem', fontWeight: 500, color: '#6B7280', marginLeft: '6px' }}>
-                      ({product.weight})
-                    </span>
-                  )}
-                </span>
+              <div className="pl-card-body">
+                <h3 className="pl-card-title">{product.name}</h3>
+                <div className="pl-card-bottom">
+                  <span className="pl-card-price">
+                    ₹{Number(product.price).toLocaleString('en-IN')}
+                    {product.isCake && (
+                      <span className="pl-card-unit"> (0.5 Kg)</span>
+                    )}
+                    {product.portion && (
+                      <span className="pl-card-unit"> ({product.portion})</span>
+                    )}
+                    {product.weight && (
+                      <span className="pl-card-unit"> ({product.weight})</span>
+                    )}
+                  </span>
+                  <span className="pl-card-arrow">View &rarr;</span>
+                </div>
               </div>
             </Link>
           ))}
+        </div>
+
+        <div className="pl-bottom-nav">
+          <Link href="/bakery-menu" className="pl-bottom-menu-link">
+            ← Browse Full Bakery Menu
+          </Link>
         </div>
       </main>
       

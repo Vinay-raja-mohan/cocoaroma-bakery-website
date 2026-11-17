@@ -18,7 +18,22 @@ export default function CategoryLayout({ categoryId }) {
 
   return (
     <div className="pl-root-sidebar">
-      
+
+      {/* MOBILE STICKY CATEGORY BAR */}
+      <div className="pl-mobile-cat-bar">
+        <div className="pl-mobile-cat-scroll">
+          {CATEGORIES.map(cat => (
+            <Link
+              key={cat.id}
+              href={`/product/${cat.id}`}
+              className={`pl-mobile-cat-item ${currentCategory.id === cat.id ? 'active' : ''}`}
+            >
+              {cat.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+
       {/* LEFT SIDEBAR - CATEGORIES (Desktop Only) */}
       <aside className="pl-sidebar">
         <h2 className="pl-sidebar-title">Categories</h2>

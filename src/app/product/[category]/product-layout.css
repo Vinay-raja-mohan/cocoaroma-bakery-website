@@ -1,3 +1,8 @@
+/* MOBILE STICKY CATEGORY BAR - hidden on desktop */
+.pl-mobile-cat-bar {
+  display: none;
+}
+
 /* Product Category Layout Styles - Sidebar Layout */
 .pl-root-sidebar {
   background-color: #F8F3E8;
@@ -299,14 +304,68 @@
 
 @media (max-width: 768px) {
   .pl-root-sidebar {
-    padding: 20px 14px 40px;
+    padding: 0 0 40px;
     flex-direction: column;
     gap: 0;
   }
-  
-  /* HIDE BULKY SIDEBAR ON MOBILE - NO OVERSIZED CATEGORY HEADER */
+
+  /* SHOW MOBILE STICKY CAT BAR */
+  .pl-mobile-cat-bar {
+    display: block;
+    position: sticky;
+    top: 64px; /* below navbar */
+    z-index: 100;
+    background-color: #FFF8E7;
+    border-bottom: 1px solid #EBE5D8;
+    box-shadow: 0 2px 8px rgba(14,59,46,0.08);
+  }
+
+  .pl-mobile-cat-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding: 10px 14px;
+    scrollbar-width: none;
+  }
+
+  .pl-mobile-cat-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pl-mobile-cat-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border-radius: 50px;
+    border: 1.5px solid #EBE5D8;
+    background-color: #FFFFFF;
+    color: #0E3B2E;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .pl-mobile-cat-item.active {
+    background-color: #0E3B2E;
+    color: #FFF8E7;
+    border-color: #0E3B2E;
+    font-weight: 600;
+  }
+
+  /* HIDE DESKTOP SIDEBAR ON MOBILE */
   .pl-sidebar {
     display: none !important;
+  }
+
+  .pl-main-content {
+    padding: 16px 14px 0;
   }
 
   .pl-main-title {

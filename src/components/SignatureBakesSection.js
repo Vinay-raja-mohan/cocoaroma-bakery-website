@@ -461,9 +461,8 @@ export default function SignatureBakesSection() {
                           <span style={{ width: '6px', height: '6px', background: '#16a34a', borderRadius: '50%' }} />
                         </span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                         <span className="card-price">₹{formattedPrice}</span>
-                        <span style={{ fontSize: '0.78rem', color: '#0D5E3D', fontWeight: 600 }}>View &rsaquo;</span>
                       </div>
                     </div>
                   </Link>

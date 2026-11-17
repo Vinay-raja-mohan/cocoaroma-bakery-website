@@ -229,11 +229,13 @@ export default function SignatureBakesSection() {
         }
 
         .card-content {
-          padding: 16px;
+          padding: 12px 16px 14px;
           display: flex;
+          flex-direction: row;
           justify-content: space-between;
           align-items: center;
           flex: 1;
+          gap: 8px;
         }
 
         .card-title {
@@ -369,18 +371,19 @@ export default function SignatureBakesSection() {
             border-radius: 10px;
           }
           .card-content {
-            padding: 10px 10px 12px;
-            flex-direction: column;
-            align-items: flex-start;
+            padding: 8px 10px 10px;
+            flex-direction: row;
+            align-items: center;
             gap: 4px;
           }
           .card-title {
-            font-size: 0.88rem;
+            font-size: 0.82rem;
             line-height: 1.25;
             padding-right: 0;
           }
           .card-price {
-            font-size: 0.92rem;
+            font-size: 0.85rem;
+            flex-shrink: 0;
           }
         }
       `}</style>
@@ -455,15 +458,8 @@ export default function SignatureBakesSection() {
                       )}
                     </div>
                     <div className="card-content">
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: '2px' }}>
-                        <h3 className="card-title">{product.name}</h3>
-                        <span style={{ display: 'inline-flex', width: '12px', height: '12px', border: '1px solid #16a34a', alignItems: 'center', justifyContent: 'center', borderRadius: '2px', flexShrink: 0 }} title="100% Pure Veg">
-                          <span style={{ width: '6px', height: '6px', background: '#16a34a', borderRadius: '50%' }} />
-                        </span>
-                      </div>
-                      <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                        <span className="card-price">₹{formattedPrice}</span>
-                      </div>
+                      <h3 className="card-title">{product.name}</h3>
+                      <span className="card-price">₹{formattedPrice}</span>
                     </div>
                   </Link>
                 );

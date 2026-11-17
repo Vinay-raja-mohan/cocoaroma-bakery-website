@@ -23,11 +23,22 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
+  applicationName: 'Cocoaroma Bakery',
   title: {
-    default: 'Cocoaroma Bakery | 100% Pure Veg Handcrafted Cakes & Pastries',
+    default: 'Cocoaroma Bakery',
     template: '%s | Cocoaroma Bakery',
   },
   description: '100% Pure Veg Patisserie & Bakery in Hyderabad. Handcrafted artisanal cakes, cheesecakes, pastries, brownies & savouries across 5 stores.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/manifest.json',
   keywords: [
     'Cocoaroma Bakery',
     'bakery Hyderabad',
@@ -50,7 +61,7 @@ export const metadata = {
     canonical: siteUrl,
   },
   openGraph: {
-    title: 'Cocoaroma Bakery | 100% Pure Veg Handcrafted Cakes & Pastries',
+    title: 'Cocoaroma Bakery',
     description: 'Artisanal eggless cakes, cheesecakes, pastries, brownies & savouries handcrafted fresh across 5 stores in Hyderabad.',
     url: siteUrl,
     siteName: 'Cocoaroma Bakery',
@@ -67,7 +78,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cocoaroma Bakery | 100% Pure Veg Handcrafted Cakes & Pastries',
+    title: 'Cocoaroma Bakery',
     description: 'Artisanal eggless cakes, cheesecakes, brownies & savouries across 5 stores in Hyderabad.',
     images: ['/images/og-image.png'],
   },

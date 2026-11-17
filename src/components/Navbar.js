@@ -545,10 +545,10 @@ export default function Navbar() {
 
       <div className="nav-container">
         {/* Logo (Image Only) */}
-        <Link href="/" className="nav-logo">
+        <Link href="/" className="nav-logo" aria-label="Cocoaroma Bakery Home">
           <Image
             src="/images/logo/logo.jpg"
-            alt="Cocoaroma Logo"
+            alt="Cocoaroma Bakery"
             width={150}
             height={40}
             priority

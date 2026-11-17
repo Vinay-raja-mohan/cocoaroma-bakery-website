@@ -1,11 +1,29 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { CATEGORIES } from '../../bakery-menu/data';
 
 export default function CategoryLayout({ categoryId }) {
   const currentCategory = CATEGORIES.find(c => c.id === categoryId);
+  const activePillRef = useRef(null);
+  const scrollBarRef = useRef(null);
+
+  // Auto-scroll the active category pill into view on mount/change
+  useEffect(() => {
+    if (activePillRef.current && scrollBarRef.current) {
+      const bar = scrollBarRef.current;
+      const pill = activePillRef.current;
+      const pillLeft = pill.offsetLeft;
+      const pillWidth = pill.offsetWidth;
+      const barWidth = bar.offsetWidth;
+      // Center the active pill in the scroll container
+      bar.scrollTo({
+        left: pillLeft - barWidth / 2 + pillWidth / 2,
+        behavior: 'smooth',
+      });
+    }
+  }, [categoryId]);
 
   if (!currentCategory) {
     return (
@@ -21,11 +39,12 @@ export default function CategoryLayout({ categoryId }) {
 
       {/* MOBILE STICKY CATEGORY BAR */}
       <div className="pl-mobile-cat-bar">
-        <div className="pl-mobile-cat-scroll">
+        <div className="pl-mobile-cat-scroll" ref={scrollBarRef}>
           {CATEGORIES.map(cat => (
             <Link
               key={cat.id}
               href={`/product/${cat.id}`}
+              ref={currentCategory.id === cat.id ? activePillRef : null}
               className={`pl-mobile-cat-item ${currentCategory.id === cat.id ? 'active' : ''}`}
             >
               {cat.name}
